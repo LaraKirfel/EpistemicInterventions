@@ -1,0 +1,1251 @@
+---
+title: "Epistemic States and Statistical Normality in Causal Judgments"
+author: "Lara Kirfel & David Lagnado"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_depth: 4
+    theme: cosmo
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  comment = "",
+  results = "hold",
+  fig.show = "hold")
+```
+
+# Install packages
+
+```{r, message=FALSE}
+install.packages("pastecs");
+install.packages("reshape")
+install.packages("lubridate")
+install.packages("lsr")
+install.packages("janitor")
+install.packages("DT")
+install.packages("Hmisc")
+install.packages("broom")
+install.packages("tidyverse")
+install.packages("ez")
+install.packages("schoRsch")
+install.packages("stringr")
+```
+
+# Load packages 
+
+```{r, message=FALSE}
+library("pastecs")
+library("reshape")
+library("knitr")
+library("lubridate")
+library("lsr")
+library("janitor") # for cleaning variable names 
+library("DT") # for nice tables
+library("Hmisc") # for smean function for bootstrapped confidence intervals 
+library("broom") # for tidy regression results
+library("tidyverse") # for data wrangling, visualization, etc. 
+library("ez")
+library("schoRsch")
+library("lme4")
+library("stringr")
+library("dplyr")
+library("afex")
+library("nlme")
+
+```
+
+```{r}
+# set ggplot theme 
+theme_set(
+  theme_classic()
+)
+```
+
+# Experiment 1:
+
+## Read in Data
+
+```{r}
+df.data = read.csv(file = "EpStates_4_noInfo.csv", stringsAsFactors = F, sep = ",") %>% 
+  filter(row_number() > 2) %>% # additional rows in qualtrics csv
+  clean_names() %>% 
+  filter(distribution_channel != "preview",
+         !condition =="", #exclude bot fails,
+          progress ==100| progress==99|progress==98)
+ 
+```
+
+## Structure and edit data
+
+```{r}
+
+df.exp = df.data %>% 
+  mutate(participant = 1:n()) %>% 
+  rename(duration=duration_in_seconds) %>% 
+  mutate(duration=as.numeric(duration)) %>% 
+  select(h_check_fact_1:b_outcome_a1_4,
+         participant,
+         order,
+         duration,
+         condition,
+         gender,
+         age,
+         -starts_with("q")
+         ) %>% 
+  gather("index", "value", -c(age, gender, participant, condition, duration, order))%>% 
+  filter(value != "") %>%
+  arrange(index)%>%
+  mutate(index = ifelse(str_detect(index,"_c_1"),
+                        "cause_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_c_2"),
+                        "cause_2",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_cf_1"),
+                        "cf_externally_caused",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_cf_2"),
+                        "cf_self_caused",
+                        index)) %>% 
+  mutate(index = ifelse(str_detect(index,"_k_1"),
+                        "could_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_k_2"),
+                        "could_2",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_b_1"),
+                        "blame_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_b_2"),
+                        "blame_2",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_look_a1"),
+                        "look_a1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_look_a2"),
+                        "look_a2",
+                        index)) %>% 
+  mutate(index = ifelse(str_detect(index,"_outcome_a1_"),
+                        "outcome_a1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_outcome_a2_"),
+                        "outcome_a2",
+                        index))%>%
+  mutate(index = ifelse(str_detect(index,"fact_1"),
+                        "fact_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"fact_2"),
+                        "fact_2",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"know_1"),
+                        "know_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"know_2"),
+                        "know_2",
+                        index)) %>% 
+  mutate(index = ifelse(str_detect(index,"mail_1"),
+                        "mail_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"mail_2"),
+                        "mail_2",
+                        index)) %>%
+  mutate(index = ifelse(str_detect(index,"read_1"),
+                        "read_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"read_2"),
+                        "read_2",
+                        index)) %>%
+  mutate(order = ifelse(order == 1,"dont know first", 
+                          ifelse(order == 2, "know first", " ")))%>%
+  mutate(scenario = ifelse(condition == 1,"hospital", 
+                          ifelse(condition == 2, "garden", 
+                          ifelse(condition == 3, "bakery", " "))))%>%
+  spread(index, value) %>%
+  arrange(participant)
+
+```
+
+
+```{r}
+####Experiment 1: Create filter
+df.exp<- df.exp%>%  
+  mutate(check_total=if_else(know_1=="2", 1, 0)) %>% 
+  mutate(check_total=if_else(know_2 =="2", check_total+1, check_total)) %>% 
+  mutate(check_total=if_else(fact_1 =="1", check_total+1, check_total)) %>% 
+  mutate(check_total=if_else(fact_2=="1",  check_total+1, check_total)) %>% 
+  mutate(check_total=if_else(read_1=="1",  check_total+1, check_total)) %>% 
+  mutate(check_total=if_else(read_2=="2",  check_total+1, check_total)) %>% 
+  mutate(check_total=if_else(mail_1=="1",  check_total+1, check_total)) %>% 
+  mutate(check_total=if_else(mail_2=="1",  check_total+1, check_total))
+
+
+#### Set filter
+df.exp<-df.exp %>% 
+  filter(check_total ==8) ####Set to 4 to change exlusion criterion to "all check questions correct"
+```
+
+
+
+```{r}
+
+df.exp_cf = df.exp %>% 
+  select(participant,
+         condition,
+         contains("cf"))%>% 
+  gather("index", "value", -c(participant, condition))%>% 
+  filter(value != "") %>%
+  arrange(index)%>%
+  mutate(scenario = ifelse(condition == 1,"hospital", 
+                          ifelse(condition == 2, "garden", 
+                          ifelse(condition == 3, "bakery", " "))))%>%
+  spread(index, value) %>%
+  arrange(participant)
+
+write.csv(df.exp_cf,'Counterfactuals.csv')
+```
+
+
+##join with counterfactual responses
+
+```{r}
+df.counterfactuals<-read.csv("Counterfactuals_analysed.csv") %>% 
+  select(participant, counterfactual_1, counterfactual_2) 
+  
+df.exp<-df.exp %>% 
+inner_join(df.counterfactuals, by="participant") %>% 
+filter(counterfactual_1 != "X" ) %>% 
+filter(counterfactual_2 != "X")
+```
+
+### Demographics
+```{r}
+####Experiment 1
+###Demographics
+
+df.exp_demo <- df.exp %>% 
+  select(age, gender, duration) %>% 
+  mutate(age=as.numeric(age)) %>%
+  transform(gender= ifelse(gender==1, "Male", #recode numbers into gender categories
+                    ifelse(gender==2, "Female",
+                    ifelse(gender==3, "Prefer not to say", gender)))) %>% 
+  filter(age<100 |age ==" ") %>% #remove outliers (year) or N.A.s
+  summarize(n=n(),
+             female=sum(gender=="Female"),
+             not_say=sum(gender=="Prefer not to say"),
+             mean_age = mean(age),
+             std_age=sd(age),
+             mean_time=mean(duration/60),
+             sd_time=sd(duration/60)
+            )
+
+
+df.exp_desc <- df.exp %>% 
+  select(participant, scenario) %>% 
+  group_by(scenario) %>% 
+  summarize(n=n())
+```
+
+```{r}
+df.exp_desc_1<- df.exp_long%>%
+  group_by(ignorance) %>%
+  summarise(c_mean = mean(causal_rating),#causal rating
+            c_sd   = sd(causal_rating), 
+            c_se   = c_sd / sqrt(n()), 
+            c_upper_ci = c_mean+c_se*1.96, 
+            c_lower_ci = c_mean-c_se*1.96,
+            k_mean = mean(know_rating),
+            K_sd   = sd(know_rating), 
+            k_upper_ci = k_mean+c_se*1.96, 
+            k_lower_ci = k_mean-c_se*1.96,
+            b_mean = mean(blame_rating),
+            b_sd   = sd(blame_rating),
+            b_upper_ci = b_mean+c_se*1.96, 
+            b_lower_ci = b_mean-c_se*1.96           
+)
+
+df.exp_desc_2<- df.exp_long2%>%
+  group_by( scenario, ignorance) %>%
+  summarise(n=n(),
+            l_mean = mean(look_rating),#causal rating
+            l_sd   = sd(look_rating), 
+            o_mean = mean(outcome_rating),
+            o_sd   = sd(outcome_rating)
+)
+
+
+
+```
+
+
+```{r}
+
+
+##########
+
+df.exp_long = df.exp %>% 
+  select(scenario,
+         order,
+         participant,
+         contains("cause"),
+         contains("could"),
+         contains("blame"),
+          contains("counterfactual_"),
+         -starts_with("cf")
+         ) %>% 
+  gather(condition, rating, "cause_1":"counterfactual_2") %>%  
+  mutate(ignorance = ifelse(str_detect(condition, "1"),
+                        "reads e-mail", "doesn't read e-mail")) %>% 
+  mutate(condition = ifelse(str_detect(condition, "cause"),"causal_rating", 
+                                ifelse(str_detect(condition, "could"), "know_rating", 
+                                       ifelse(str_detect(condition, "blame"), "blame_rating", "counterfactual"
+                                                     )))) %>% 
+  spread(condition, rating) %>% 
+  mutate(scenario=as.factor(scenario)) %>% 
+  mutate(ignorance=as.factor(ignorance)) %>% 
+  mutate(causal_rating=as.numeric(causal_rating)) %>% 
+  mutate(know_rating=as.numeric(know_rating)) %>% 
+  mutate(blame_rating=as.numeric(blame_rating)) %>% 
+  mutate(counterfactual=recode(counterfactual, 
+                               '1' = "causal action",
+                               '2_0' = "epist. change",
+                               '2_2_1' = "... by e-mail reading",
+                               '2_1' = "... by info" ,
+                               '2_2' = "... by info + e-mail reading",
+                               '2_3' = "... by other action of agent",
+                               '2_4' = " ... by someone else",
+                               '4' =  "environment" ))%>% 
+  mutate(counterfactual=factor(counterfactual, levels=c("epist. change", "... by info", "... by info + e-mail reading", "... by other action of agent", " ... by someone else", "causal action", "... by e-mail reading", "environment"))) %>% 
+  mutate(ignorance=factor(ignorance, levels= c("reads e-mail", "doesn't read e-mail")))
+
+
+```
+  
+```{r}
+
+### Dataframe just with CF Responses (non-sensical deleted)
+
+df.exp_cf<- df.exp_long %>% 
+  select(participant, scenario, order, ignorance, counterfactual) %>% 
+   filter(!str_detect(counterfactual, 'causal action')) %>% 
+  filter(!str_detect(counterfactual, 'environment')) %>% 
+  filter(!str_detect(counterfactual, '... by e-mail reading')) 
+```
+
+```{r}
+df.exp_cf_desc <- df.exp_long%>% 
+  group_by(counterfactual, ignorance) %>% 
+  summarize(n=n()) %>% 
+  mutate(freq=prop.table(n))
+```
+  
+  
+  
+```{r}
+
+####Look and Outcome Ratings
+
+df.exp_long2 = df.exp %>% 
+  select(scenario,
+         order,
+         participant,
+         contains("look"),
+         contains("outcome"),
+         -starts_with("cf"))%>%
+  gather(condition, rating, "look_a1":"outcome_a2") %>%  
+  mutate(ignorance = ifelse(str_detect(condition, "_a1"),
+                        "reads e-mail", "doesn't read e-mail")) %>% 
+  mutate(condition = ifelse(str_detect(condition, "look"),"look_rating", "outcome_rating"
+                                              ))%>% 
+  spread(condition, rating) %>% 
+  mutate(scenario=as.factor(scenario)) %>% 
+  mutate(ignorance=as.factor(ignorance)) %>% 
+  mutate(look_rating=as.numeric(look_rating)) %>% 
+  mutate(outcome_rating=as.numeric(outcome_rating)) %>% 
+  mutate(ignorance=factor(ignorance, levels= c("reads e-mail", "doesn't read e-mail")))
+
+
+```
+
+
+```{r}
+
+### Experiment 1
+#### Plot Cause  Rating
+myTheme <-   theme(axis.title.x  = element_blank(), 
+                   axis.title.y = element_text(color="black", size = 18, vjust=.9), 
+                   axis.text.x = element_text(color="black", size = 18),
+                   axis.text.y = element_text(color="black", size = 18), 
+                   strip.text.x = element_text(color="black", size = 18),
+                   legend.text = element_text(color="black", size = 18),
+                   legend.position = "top",
+                   legend.title = element_blank(),
+                   panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   strip.background = element_rect(fill="white"))
+    
+
+## Cause Rating
+
+Fig4a <- ggplot(df.exp_long, aes(x=scenario, y=causal_rating, fill=ignorance)) + 
+ coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  geom_violin(trim=F, scale = "count", adjust = 3, position=position_dodge(width=0.8), alpha=0.1, color = NA)+
+  geom_jitter(position = position_jitterdodge(jitter.height = 0.1, dodge.width = 0.8, jitter.width=0.2), alpha = 
+  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+
+  scale_fill_manual(values=c("#999999", "#E69F00"), name="blank")+
+  labs( y="Causal Rating")+
+  theme_bw()+
+  myTheme
+
+Fig4a
+ggsave(Fig4a, file="Fig4a.pdf", dpi=400, height = 6, width = 8)
+
+
+## Could have known Rating
+
+Fig4b <- ggplot(df.exp_long, aes(x=scenario, y=know_rating, fill=ignorance)) + 
+ coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  geom_violin(trim=F, scale = "count", adjust = 3, position=position_dodge(width=0.8), alpha=0.1, color = NA)+
+  geom_jitter(position = position_jitterdodge(jitter.height = 0.1, dodge.width = 0.8, jitter.width=0.2), alpha = 
+  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+  scale_fill_brewer(palette="Dark2")+
+  labs( y="Could have known Rating")+
+  theme_bw()+
+  myTheme
+
+Fig4b
+ggsave(Fig4b, file="Know.pdf", dpi=400, height = 5, width = 8)
+
+
+## Blame Rating
+
+Fig4c <- ggplot(df.exp_long, aes(x=scenario, y=blame_rating, fill=ignorance)) + 
+ coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  geom_violin(trim=F, scale = "count", adjust = 3, position=position_dodge(width=0.8), alpha=0.1, color = NA)+
+  geom_jitter(position = position_jitterdodge(jitter.height = 0.1, dodge.width = 0.8, jitter.width=0.2), alpha = 
+  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+  scale_fill_brewer(palette="Set1")+
+  labs( y="Blame for Ignorance Rating")+
+  theme_bw()+
+  myTheme
+
+Fig4c
+
+ggsave(Fig4c, file="Blame.pdf", dpi=400, height = 5, width = 8)
+
+
+
+```
+###CogSci
+
+```{r}
+
+packages <- c("ggplot2", "dplyr", "lavaan", "plyr", "cowplot", "rmarkdown", 
+              "readr", "caTools", "bitops")
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+  install.packages(setdiff(packages, rownames(installed.packages())))  
+}
+
+
+source("R_rainclouds.R")
+source("summarySE.R")
+source("simulateData.R")
+
+
+
+library(cowplot)
+library(dplyr)
+library(readr)
+
+
+
+# Load packages ----
+library(ggplot2)
+
+# Defining the geom_flat_violin function ----
+# Note: the below code modifies the
+# existing github page by removing a parenthesis in line 50
+
+"%||%" <- function(a, b) {
+  if (!is.null(a)) a else b
+}
+
+geom_flat_violin <- function(mapping = NULL, data = NULL, stat = "ydensity",
+                             position = "dodge", trim = TRUE, scale = "area",
+                             show.legend = NA, inherit.aes = TRUE, ...) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomFlatViolin,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      trim = trim,
+      scale = scale,
+      ...
+    )
+  )
+}
+
+#' @rdname ggplot2-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+GeomFlatViolin <-
+  ggproto("GeomFlatViolin", Geom,
+    setup_data = function(data, params) {
+      data$width <- data$width %||%
+        params$width %||% (resolution(data$x, FALSE) * 0.9)
+
+      # ymin, ymax, xmin, and xmax define the bounding rectangle for each group
+      data %>%
+        group_by(group) %>%
+        mutate(
+          ymin = min(y),
+          ymax = max(y),
+          xmin = x,
+          xmax = x + width / 2
+        )
+    },
+
+    draw_group = function(data, panel_scales, coord) {
+      # Find the points for the line to go all the way around
+      data <- transform(data,
+        xminv = x,
+        xmaxv = x + violinwidth * (xmax - x)
+      )
+
+      # Make sure it's sorted properly to draw the outline
+      newdata <- rbind(
+        plyr::arrange(transform(data, x = xminv), y),
+        plyr::arrange(transform(data, x = xmaxv), -y)
+      )
+
+      # Close the polygon: set first and last point the same
+      # Needed for coord_polar and such
+      newdata <- rbind(newdata, newdata[1, ])
+
+      ggplot2:::ggname("geom_flat_violin", GeomPolygon$draw_panel(newdata, panel_scales, coord))
+    },
+
+    draw_key = draw_key_polygon,
+
+    default_aes = aes(
+      weight = 1, colour = "grey20", fill = "white", size = 0.5,
+      alpha = NA, linetype = "solid"
+    ),
+
+    required_aes = c("x", "y")
+  )
+
+
+CausalExp4 <- ggplot(df.exp_long, aes(x=ignorance,y=causal_rating, fill = ignorance, colour = ignorance))+
+  coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  geom_flat_violin(position = position_nudge(x = .1, y = 0),adjust =1.5, alpha=0.5)+
+  geom_point(position = position_jitter(width = .1), size = 1, alpha=0.5)+
+  stat_summary(fun.data = mean_cl_normal, geom = "pointrange", position = position_nudge(x=.1), colour = "BLACK", width = 0.5,
+  size = 1.2, shape = 21, fatten = 2.5)+
+  ylab('Score')+xlab('Group')+
+  theme_cowplot()+
+  scale_fill_manual(values=c("#999999", "#E69F00"), name="blank", labels=c("Knowledge", "No Knowledge"))+
+  scale_colour_manual(values=c("#999999", "#E69F00"), name="blank", labels=c("Knowledge", "No Knowledge"))+
+  labs( y="Causal Rating")+
+  theme_bw()+
+  guides(fill = FALSE, colour = FALSE) +
+  facet_grid(~scenario)+
+  theme(axis.title.x  = element_blank(), 
+                   axis.title.y = element_text(color="black", size = 12, vjust=.9), 
+                   axis.text.x = element_text(color="black", size = 10),
+                   axis.text.y = element_text(color="black", size = 12), 
+                   strip.text.x = element_text(color="black", size = 12),
+                   legend.text = element_text(color="black", size = 12),
+                   legend.position = "top",
+                   legend.title = element_blank(),
+                   panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   strip.background = element_rect(fill="white"))
+    
+
+
+
+CausalExp4
+ggsave(CausalExp4, file="CausalExp4.jpeg", dpi=400, height = 3, width = 4)
+ggsave(CausalExp4, file="CausalExp4.jpeg", dpi=400, height = 5, width = 8)
+
+
+"save_plot("test.pdf", p1)"
+
+CFExp4<-ggplot(df.exp_cf, aes(x=counterfactual, group=ignorance))+
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") + 
+  coord_cartesian(ylim = c(0,1)) +
+  scale_y_continuous(labels=scales::percent_format(accuracy = 1), breaks = seq(0, 1, by=0.20)) +
+  ylab("proportion of response") +
+  facet_wrap(~ignorance)+
+  scale_fill_brewer(palette="Greys", direction=-1)+
+  theme_bw()+
+  myTheme+
+  theme(legend.position= "none")+
+  theme(axis.title.y = element_text(color="black", size = 14),
+    axis.text.y = element_text(color="black", size = 12, margin = margin (r=0, l=0)),
+    axis.text.x = element_text(angle = 20, hjust = 1, color="black", size = 12),
+    strip.text.x = element_text(size = 12))
+
+CFExp4
+ggsave(CFExp4, file="CFExp4.jpeg", dpi=400, height = 4, width = 5)
+ggsave(CFExp4, file="CFExp4.jpeg", dpi=400, height = 4, width = 5)
+
+```
+
+
+```{r}
+## Counterfactual Selection
+
+
+
+Fig4b<- df.exp_cf %>%  
+  ggplot(aes(x=counterfactual, group=ignorance))+
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") + 
+  coord_cartesian(ylim = c(0,1)) +
+  scale_y_continuous(labels=scales::percent_format(accuracy = 1), breaks = seq(0, 1, by=0.20)) +
+  ylab("proportion of responses") +
+  facet_wrap(~ignorance)+
+  scale_fill_brewer(palette = "Greys")+
+  theme_bw()+
+  myTheme+
+  theme(legend.position= "none")+
+  theme(
+  axis.text.x = element_text(angle = 20, hjust = 1, color="black", size = 14))
+
+plot(Fig4b)
+ggsave(Fig4b, file="Fig4b.pdf", dpi=400, height = 5, width = 8)
+
+
+
+
+##########Causal Rating by Category
+############
+Fig4b2 <- df.exp_long%>% 
+  filter(counterfactual=="... by other action of agent" | counterfactual=="... by info"  | counterfactual=="... by info + e-mail reading") %>% 
+  ggplot(aes(x=counterfactual, y=causal_rating, fill=counterfactual)) + 
+  coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  geom_jitter(height = 0.1, width = 0.1, alpha =  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+  scale_fill_manual(values=c("gray42", "gray72", "gray72"))+
+  facet_wrap(~ignorance)+
+  labs( y="Causal Rating")+
+  theme_bw()+
+  myTheme+
+  theme(axis.text.x = element_text(angle = 20, hjust = 1, color="black", size = 14))
+
+Fig4b2
+ggsave(Fig4b2, file="Fig4b2.jpeg", dpi=400, height = 4, width = 6)
+
+
+
+```
+
+```{r}
+## Could have known Rating
+
+Fig4b <- ggplot(df.exp_long, aes(x=scenario, y=know_rating, fill=ignorance)) + 
+ coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  #geom_violin(trim=F, scale = "count", adjust = 3, position=position_dodge(width=0.8), alpha=0.1, color = NA)+
+  geom_jitter(position = position_jitterdodge(jitter.height = 0.1, dodge.width = 0.8, jitter.width=0.2), alpha = 
+  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+    scale_fill_manual(values=c("#999999", "#E69F00"))+
+  #scale_fill_brewer(palette="Dark2")+
+  labs( y="Could have known Rating")+
+  theme_bw()+
+  myTheme
+
+Fig4b
+ggsave(Fig4b, file="Know.pdf", dpi=400, height = 5, width = 8)
+ggsave(Fig4b, file="Know.jpeg", dpi=400, height = 5, width = 8)
+
+
+## Blame Rating
+
+Fig4c <- ggplot(df.exp_long, aes(x=scenario, y=blame_rating, fill=ignorance)) + 
+ coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  #geom_violin(trim=F, scale = "count", adjust = 3, position=position_dodge(width=0.8), alpha=0.1, color = NA)+
+  geom_jitter(position = position_jitterdodge(jitter.height = 0.1, dodge.width = 0.8, jitter.width=0.2), alpha = 
+  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+  #scale_fill_brewer(palette="Set1")+
+  scale_fill_manual(values=c("#999999", "#E69F00"))+
+  labs( y="Blame for Ignorance Rating")+
+  theme_bw()+
+  myTheme
+
+Fig4c
+
+ggsave(Fig4c, file="Blame.pdf", dpi=400, height = 5, width = 8)
+ggsave(Fig4c, file="Blame.jpeg", dpi=400, height = 5, width = 8)
+```
+
+
+
+
+```{r}
+
+
+#### Analysing Causal etc. Ratings according to Counterfactual Response category
+
+
+Fig4b2 <- df.exp_long %>% 
+  filter(counterfactual=="... by correct info" | counterfactual=="... by reading e-mail" | counterfactual == "... by correct info + reading e-mail" | counterfactual =="... by other action of agent") %>% 
+   ggplot(aes(x=counterfactual, y=causal_rating, fill=counterfactual)) + 
+  coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  geom_jitter(height = 0.1, width = 0.1, alpha =  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) + 
+  #geom_violin(trim=F, scale = "count", adjust = 3, position=position_dodge(width=0.8), alpha=0.1, color = NA)+
+  #scale_fill_manual(values=c("gray71", "grey25"), name="blank")+
+  facet_wrap(~ignorance)+
+  #geom_text(data = df.text,
+  #          label = label,
+  #          size = 6) +
+  labs(x= "Epistemic state change")+
+  labs(y="Causal Rating")+
+  labs(title="Ignorance")+
+  theme_bw()+
+  theme(legend.position= "none")+
+  myTheme+
+  theme(axis.text.x = element_text(angle = 15, hjust = 1, color="black", size = 14),
+          legend.position= "none")
+
+
+Fig4b2
+
+plot(Fig4b2)
+ggsave(Fig4b2, file="Fig4b2.pdf", dpi=400, height = 5, width = 8)
+
+```
+
+```{r}
+
+### Experiment 1
+#### Plot Cause  Rating
+myTheme <-   theme(axis.title.x  = element_blank(), 
+                   axis.title.y = element_text(color="black", size = 18, vjust=.9), 
+                   axis.text.x = element_text(color="black", size = 18),
+                   axis.text.y = element_text(color="black", size = 18), 
+                   strip.text.x = element_text(color="black", size = 18),
+                   legend.text = element_text(color="black", size = 18),
+                   legend.position = "top",
+                   legend.title = element_blank(),
+                   panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   strip.background = element_rect(fill="white"))
+    
+
+## Look
+
+Fig4d <- ggplot(df.exp_long2, aes(x=ignorance, y=look_rating, fill=ignorance)) + 
+  #coord_cartesian(ylim = c(-5,105)) +
+  #scale_y_continuous(breaks = seq(-5, 105))+
+  #geom_violin(trim=T, scale = "count", adjust = 3, position=position_dodge(width=0.8), alpha=0.1, color = NA)+
+  geom_jitter(position = position_jitterdodge(jitter.height = 0.1, dodge.width = 0.8, jitter.width=0.2), alpha = 
+  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+  scale_fill_manual(values=c("#999999", "#E69F00"), name="blank")+
+  labs( y="Likelihood - Information aquisition")+
+  theme_bw()+
+  myTheme
+
+Fig4d
+ggsave(Fig4d, file="4d.pdf", dpi=400, height = 5, width = 8)
+
+
+df.exp_long22 <- df.exp_long2 %>% 
+  gather(ratingtype, value, look_rating:outcome_rating)
+
+Fig4e <- ggplot(df.exp_long22, aes(x=ratingtype, y=value, fill=ignorance)) + 
+  #coord_cartesian(ylim = c(-5,105)) +
+  #scale_y_continuous(breaks = seq(-5, 105))+
+  #geom_violin(trim=T, scale = "count", adjust = 3, position=position_dodge(width=0.8), alpha=0.1, color = NA)+
+  geom_jitter(position = position_jitterdodge(jitter.height = 0.1, dodge.width = 0.8, jitter.width=0.2), alpha = 
+  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+  scale_fill_manual(values=c("#999999", "#E69F00"), name="blank")+
+  labs( y="Estimated Likelihood ....")+
+  scale_x_discrete(labels= c("...of agent reading future e-mail", "... future of outcome"))+
+  theme_bw()+
+  myTheme
+
+Fig4e
+ggsave(Fig4d, file="4e.pdf", dpi=400, height = 5, width = 8)
+
+
+## Outcome
+
+Fig4e <- ggplot(df.exp_long2, aes(x=scenario, y=outcome_rating, fill=ignorance)) + 
+  coord_cartesian(ylim = c(0,101)) +
+  scale_y_continuous(breaks = seq(0, 100))+
+  geom_violin(trim=T, scale = "count", adjust = 3, position=position_dodge(width=0.8), alpha=0.1, color = NA)+
+  geom_jitter(position = position_jitterdodge(jitter.height = 0.1, dodge.width = 0.8, jitter.width=0.2), alpha = 
+  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+  scale_fill_manual(values=c("#999999", "#E69F00"), name="blank")+
+  labs( y="Estimated Likelihod...")+
+  theme_bw()+
+  myTheme
+
+Fig4e
+ggsave(Fig4e, file="4e.pdf", dpi=400, height = 5, width = 8)
+
+mixed(look_rating ~ 1 + ignorance*scenario +  (1 | participant), df.exp_long2, method = 'LRT')
+mixed(outcome_rating ~ ignorance +  (1 | participant), df.exp_long2, method = 'LRT')
+
+
+
+
+```
+
+```{r}
+### Experiment 4: Causal Ratings
+
+df.exp_long <- within(df.exp_long, ignorance <- relevel(ignorance, ref = 'read'))
+df.exp_long <- within(df.exp_long, scenario<- relevel(scenario, ref = 'bakery'))
+
+
+mixed(causal_rating ~ 1 + ignorance*scenario +  (1 | participant), df.exp_long, method = 'LRT')
+C4  <- lmer(causal_rating ~ 1 + ignorance*scenario + (1 | participant), df.exp_long, REML=T)
+summary(C4)
+```
+
+
+
+```{r}
+### Experiment 4: Knowledge Ratings
+
+df.exp_long <- within(df.exp_long, ignorance <- relevel(ignorance, ref = 'few actions'))
+df.exp_long <- within(df.exp_long, scenario<- relevel(scenario, ref = 'bakery'))
+
+
+mixed(know_rating ~ 1 + ignorance*scenario +  (1 | participant), df.exp_long, method = 'LRT')
+K4  <- lmer(know_rating ~ 1 + ignorance*scenario + (1 | participant), df.exp_long, REML=T)
+summary(K4)
+
+```
+
+```{r}
+### Experiment 3: Blame Ratings
+
+df.exp_long <- within(df.exp_long, ignorance <- relevel(ignorance, ref = 'few actions'))
+df.exp_long <- within(df.exp_long, scenario<- relevel(scenario, ref = 'bakery'))
+
+
+mixed(blame_rating ~ 1 + ignorance*scenario +  (1 | participant), df.exp_long, method = 'LRT')
+B4  <- lmer(blame_rating ~ 1 + ignorance*scenario + (1 | participant), df.exp_long, REML=T)
+summary(B4)
+
+```
+
+
+
+```{r}
+### Experiment 1
+##### 
+### Test Fixed Effects: Causal, Know and Blame Ratings
+
+C1_m1 <- lmer(causal_rating ~ ignorance +(1|participant), df.exp_long, REML=F)
+C1_m2 <- lmer(causal_rating ~ scenario +(1|participant), df.exp_long, REML=F)
+C1_m3 <- lmer(causal_rating ~ ignorance +scenario + (1|participant), df.exp_long, REML=F)
+C1_m4 <- lmer(causal_rating ~ ignorance * scenario +(1|participant), df.exp_long, REML=F)
+
+##Effect of Knowledge
+anova(C1_m2,C1_m3)
+
+##Effect of Scenario
+anova(C1_m1,C1_m3)
+
+##Interaction Knowledge x Scenario
+anova(C1_m3,C1_m4)
+
+lmerTest::lmer(causal_rating ~ ignorance*scenario + (1 | participant), df.exp_long)%>% summary()
+mixed(causal_rating ~ 1 + ignorance*scenario +  (1 |participant), df.exp_long, method = 'LRT')
+
+
+
+
+
+##### KNowledge Rating
+K1_m1 <- lmer(know_rating ~ ignorance +(1|participant), df.exp_long, REML=F)
+K1_m2 <- lmer(know_rating ~ scenario +(1|participant), df.exp_long, REML=F)
+K1_m3 <- lmer(know_rating ~ ignorance +scenario + (1|participant), df.exp_long, REML=F)
+K1_m4 <- lmer(know_rating ~ ignorance * scenario +(1|participant), df.exp_long, REML=F)
+
+##Effect of Knowledge
+anova(K1_m2,K1_m3)
+summary(K1_m3)
+
+##Effect of Scenario
+anova(K1_m1,K1_m3)
+
+##Interaction Knowledge x Scenario
+anova(K1_m3,K1_m4)
+
+lmerTest::lmer(know_rating ~ ignorance*scenario + (1 | participant), df.exp_long)%>% summary()
+mixed(know_rating ~ 1 + ignorance*scenario +  (1 |participant), df.exp_long, method = 'LRT')
+
+
+
+
+##### Blame Rating
+B1_m1 <- lmer(blame_rating ~ ignorance +(1|participant), df.exp_long, REML=F)
+B1_m2 <- lmer(blame_rating ~ scenario +(1|participant), df.exp_long, REML=F)
+B1_m3 <- lmer(blame_rating ~ ignorance +scenario + (1|participant), df.exp_long, REML=F)
+B1_m4 <- lmer(blame_rating ~ ignorance * scenario +(1|participant), df.exp_long, REML=F)
+
+##Effect of Knowledge
+anova(B1_m2,B1_m3)
+
+##Effect of Scenario
+anova(B1_m1,B1_m3)
+summary(B1_m3)
+
+##Interaction Knowledge x Scenario
+anova(B1_m3,B1_m4)
+
+lmerTest::lmer(blame_rating ~ ignorance*scenario + (1 | participant), df.exp_long)%>% summary()
+mixed(blame_rating ~ 1 + ignorance*scenario +  (1 |participant), df.exp_long, method = 'LRT')
+
+
+
+
+```
+
+```{r}
+### Experiment 2
+##### 
+### Test Fixed Effects: Action and Outcome Likelihood Rating
+
+### Look Rating
+L1_m0 <- lmer(look_rating ~ (1|participant), df.exp_long2, REML=F)
+L1_m1 <- lmer(look_rating ~ ignorance +(1|participant), df.exp_long2, REML=F)
+L1_m2 <- lmer(look_rating ~ scenario +(1|participant), df.exp_long2, REML=F)
+L1_m3 <- lmer(look_rating ~ ignorance +scenario + (1|participant), df.exp_long2, REML=F)
+L1_m4 <- lmer(look_rating ~ ignorance * scenario +(1|participant), df.exp_long2, REML=F)
+
+##Effect of Knowledge
+anova(L1_m0,L1_m1)
+
+##Effect of Knowledge
+anova(L1_m2,L1_m3)
+
+##Effect of Scenario
+anova(L1_m1,L1_m3)
+
+##Interaction Knowledge x Scenario
+anova(L1_m3,L1_m4)
+
+lmerTest::lmer(look_rating ~ ignorance*scenario + (1 | participant), df.exp_long2)%>% summary()
+mixed(look_rating ~ 1 + ignorance*scenario +  (1 |participant), df.exp_long2, method = 'LRT')
+
+
+
+### Outcome Rating
+O1_m0 <- lmer(outcome_rating ~ (1|participant), df.exp_long2, REML=F)
+O1_m1 <- lmer(outcome_rating ~ ignorance +(1|participant), df.exp_long2, REML=F)
+O1_m2 <- lmer(outcome_rating ~ scenario +(1|participant), df.exp_long2, REML=F)
+O1_m3 <- lmer(outcome_rating ~ ignorance +scenario + (1|participant), df.exp_long2, REML=F)
+O1_m4 <- lmer(outcome_rating ~ ignorance * scenario +(1|participant), df.exp_long2, REML=F)
+
+##Effect of Knowledge
+anova(O1_m0,O1_m1)
+
+##Effect of Knowledge
+anova(O1_m2,O1_m3)
+
+##Effect of Scenario
+anova(O1_m1,O1_m3)
+
+##Interaction Knowledge x Scenario
+anova(O1_m3,O1_m4)
+
+lmerTest::lmer(outcome_rating ~ ignorance+ (1 | participant), df.exp_long2)%>% summary()
+mixed(outcome_rating ~ 1 + ignorance*scenario +  (1 |participant), df.exp_long2, method = 'LRT')
+
+
+rt_anova2 = ezANOVA(
+    data = df.exp_long2
+    , dv = .(outcome_rating)
+    , wid = .(participant)
+    , within = .(ignorance)
+    , between = .(scenario) 
+)
+
+
+### Outcome Rating
+O1_m0 <- lmer(outcome_rating ~ (1|participant), df.exp_long2, REML=F)
+O1_m1 <- lmer(outcome_rating ~ ignorance +(1|participant), df.exp_long2, REML=F)
+O1_m2 <- lmer(outcome_rating ~ scenario +(1|participant), df.exp_long2, REML=F)
+O1_m3 <- lmer(outcome_rating ~ ignorance +scenario + (1|participant), df.exp_long2, REML=F)
+O1_m4 <- lmer(outcome_rating ~ ignorance * scenario +(1|participant), df.exp_long2, REML=F)
+
+##Effect of Knowledge
+anova(O1_m0,O1_m1)
+
+##Effect of Knowledge
+anova(O1_m2,O1_m3)
+
+##Effect of Scenario
+anova(O1_m1,O1_m3)
+
+##Interaction Knowledge x Scenario
+anova(O1_m3,O1_m4)
+
+lmerTest::lmer(outcome_rating ~ ignorance+ (1 | participant), df.exp_long2)%>% summary()
+mixed(outcome_rating ~ 1 + ignorance*scenario +  (1 |participant), df.exp_long2, method = 'LRT')
+
+
+rt_anova2 = ezANOVA(
+    data = df.exp_long2
+    , dv = .(outcome_rating)
+    , wid = .(participant)
+    , within = .(ignorance)
+    , between = .(scenario) 
+)
+
+
+
+
+#####Outcome from ignorance and look_rating
+lmerTest::lmer(outcome_rating ~ ignorance*look_rating + (1 | participant), df.exp_long2)%>% summary()
+mixed(outcome_rating ~ 1 + ignorance*look_rating +  (1 |participant), df.exp_long2, method = 'LRT')
+
+O1_m4<-lmer(outcome_rating ~ ignorance * look_rating +(1|participant), df.exp_long2, REML=F)
+
+
+O1_m3<-lm(outcome_rating ~ look_rating, df.exp_long2[df.exp_long2$ignorance=="doesn't read e-mail", ])
+O1_m4<-lm(outcome_rating ~ look_rating, df.exp_long2[df.exp_long2$ignorance=="reads e-mail", ])
+
+
+
+summary(O1_m3)
+summary(O1_m4)
+
+```
+
+
+
+
+```{r}
+CausalExp3 <- ggplot(df.exp_long, aes(x=ignorance,y=causal_rating, fill = ignorance, colour = ignorance))+
+  coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  geom_flat_violin(position = position_nudge(x = .1, y = 0),adjust =1.5, alpha=0.5)+
+  geom_point(position = position_jitter(width = .1), size = 1, alpha=0.5)+
+  stat_summary(fun.data = mean_cl_normal, geom = "pointrange", position = position_nudge(x=.1), colour = "BLACK", width = 0.5,
+  size = 1.2, shape = 21, fatten = 2.5)+
+  ylab('Score')+xlab('Group')+
+  theme_cowplot()+
+  scale_fill_manual(values=c("#999999", "#E69F00"), name="blank", labels=c("Knowledge", "No Knowledge"))+
+  scale_colour_manual(values=c("#999999", "#E69F00"), name="blank", labels=c("Knowledge", "No Knowledge"))+
+  labs( y="Causal Rating")+
+  theme_bw()+
+  guides(fill = FALSE, colour = FALSE) +
+  
+  
+  
+FFCExp3<-  ggplot(df.exp_long2, aes(x=look_rating, y=outcome_rating, color=ignorance, shape=ignorance)) +
+  geom_point(size=2, position = "jitter", width = 0.5, height = 0.3, alpha = 0.4) + 
+  geom_smooth(method=lm, se=F, fullrange=F, aes(fill=ignorance))+
+  theme_bw()+
+  theme_cowplot()+
+  scale_fill_manual(values=c("#999999", "#E69F00"), name="blank")+
+  scale_colour_manual(values=c("#999999", "#E69F00"), name="blank")+
+  xlab("Likelihood of reading future e-mail") + ylab("Likelihood of future outcome")+
+  theme(axis.title.x  = element_text(color="black", size = 12, vjust=.9), 
+                   axis.title.y = element_text(color="black", size = 12), 
+                   axis.text.x = element_text(color="black", size = 12),
+                   axis.text.y = element_text(color="black", size = 12), 
+                   strip.text.x = element_text(color="black", size = 12),
+                   legend.text = element_text(color="black", size = 12),
+                   legend.position = "top",
+                   #legend.direction = "horizontal",
+                   legend.title = element_blank(),
+                   panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   strip.background = element_rect(fill="white"))+
+  guides(color=guide_legend(title.position="top", 
+                                     title.hjust =0.5))+
+scale_shape(guide=FALSE)
+    
+
+
+
+FFCExp3
+ggsave(FFCExp3, file="FFCExp3.jpeg", dpi=400, height = 5, width = 7)
+```
+
+
+
+
+
+
+
+```{r}
+###Could have known predicts causal
+
+
+cor(df.exp_long$causal_rating, df.exp_long$know_rating)   
+
+Cause_Know <- lm(causal_rating ~ know_rating, df.exp_long)  
+print(Cause_Know)
+summary(Cause_Know)
+
+
+Cause_Know2 <- lm(causal_rating ~ know_rating + ignorance, df.exp_long)
+summary(Cause_Know2)
+
+scatter.smooth(x=df.exp_long$know_rating, y=df.exp_long$causal_rating) 
+
+
+ggplot(df.exp_long, aes(x = know_rating, y = causal_rating, colour = ignorance)) + geom_point()
+
+
+```
+```{r}
+
+####Blame predicts causal
+
+cor(df.exp_long$causal_rating, df.exp_long$blame_rating)  #
+
+
+Cause_Blame <- lm(causal_rating ~ blame_rating, df.exp_long)  # build linear regression model on full data
+print(Cause_Blame)
+
+summary(Cause_Blame)
+
+Cause_Blame2 <- lm(causal_rating ~ blame_rating + ignorance, df.exp_long)
+summary(Cause_Blame2)
+
+scatter.smooth(x=df.exp_long$blame_rating, y=df.exp_long$causal_rating) 
+
+
+ggplot(df.exp_long, aes(x = blame_rating, y = causal_rating, colour = ignorance)) + geom_point()
+
+```
+
+```{r}
+
+###know rating predicts blame
+cor(df.exp_long$blame_rating, df.exp_long$know_rating)  #
+
+
+Blame_Know <- lm(blame_rating ~ know_rating, df.exp_long)  # build linear regression model on full data
+print(Blame_Know)
+
+summary(Blame_Know)
+
+Blame_Know2 <- lm(blame_rating ~ know_rating +ignorance, df.exp_long)
+summary(Blame_Know2)
+
+scatter.smooth(x=df.exp_long$know_rating, y=df.exp_long$blame_rating) 
+
+
+ggplot(df.exp_long2, aes(x = look_rating, y = outcome_rating, colour = ignorance)) + geom_point()+
+  geom_smooth()
+
+Blame_Know2 <- lm(outcome_rating ~ ignorance, df.exp_long2)
+summary(Blame_Know2)
+
+```
+
+```{r}
+###### Selection of externally caused ignorance: code category external vs. own action could have been different.
+
+Fig3a <- df.exp_long %>% 
+  filter(ignorance=="externally caused") %>% 
+  filter(code_detailed=="2_3" | code_detailed=="2_4") %>% 
+  ggplot(aes(x=code_detailed, y=causal_rating)) + 
+  coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  geom_violin(trim=F, scale = "count", adjust = 3, width=0.8, alpha=0.1, color = NA)+
+  geom_jitter(height = 0.1, width = 0.8, alpha =  0.3, colour = "grey")+
+  stat_summary(fun.data = mean_cl_boot, geom = "pointrange", position = position_dodge(width = 0.8), width = 0.2,
+  size = 1, shape = 21) +  
+  scale_fill_manual(values=c("#999999", "#E69F00"), name="blank")+
+  labs( y="Causal Rating")+
+  theme_bw()+
+  myTheme
+
+Fig3a
+
+```
+
+```{r}
+df.exp_cf <- within(df.exp_cf, ignorance <- relevel(ignorance, ref = 'reads e-mail'))
+
+
+
+library(VGAM)
+vglm2 <- vglm(counterfactual ~ ignorance, family=multinomial(refLevel="epist. change"), df.exp_cf)
+vglm0 <- vglm(counterfactual ~ +1, family=multinomial(refLevel="epist. change"), df.exp_cf)
+
+
+#coding
+head(depvar(vglm2))
+
+#number in categories
+colSums(depvar(vglm2))
+
+#likelihood ratio test null vs factor model 
+VGAM::lrtest(vglm0, vglm2)
+
+#summary null model
+sum0 <- summary(vglm0)
+
+#factor model
+sum1   <- summary(vglm2)
+
+coefMN <- coef(sum1)
+
+##odds ratio
+exp(coef(vglm2))
+
+
+#lr test interaction with scenario
+VGAM::lrtest(vglm1, vglm2)
+sum2   <- summary(vglm2)
+
+
+#R
+LLf   <- logLik(vglm2)
+LL0   <- logLik(vglm0)
+
+
+as.vector(1 - (LLf / LL0))
+
+
+```
+```
+

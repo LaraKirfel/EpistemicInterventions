@@ -1,0 +1,249 @@
+StartDate,EndDate,Status,IPAddress,Progress,Duration (in seconds),Finished,RecordedDate,ResponseId,RecipientLastName,RecipientFirstName,RecipientEmail,ExternalReference,LocationLatitude,LocationLongitude,DistributionChannel,UserLanguage,Q37,Q38,Q39,Q40,Q41,H_Check_fact_1,H_Check_mail_1,H_Check_read_1,H_Check_know_1,H_C_1_1,H_CF_1,H_K_1_1,H_B_1_1,H_Check_fact_2,H_Check_mail_2,H_Check_read_2,H_Check_know_2,H_C_2_1,H_CF_2,H_K_2_1,H_B_2_1,G_Check_fact_1,G_Check_mail_1,G_Check_read_1,G_Check_know_1,G_C_1_1,G_CF_1,G_K_1_1,G_B_1_1,G_Check_fact_2,G_Check_mail_2,G_Check_read_2,G_Check_know_2,G_C_2_1,G_CF_2,G_K_2_1,G_B_2_1,B_Check_fact_1,B_Check_mail_1,B_Check_read_1,B_Check_know_1,B_C_1_1,B_CF_1,B_K_1_1,B_B_1_1,B_Check_fact_2,B_Check_mail_2,B_Check_read_2,B_Check_know_2,B_C_2_1,B_CF_2,B_K_2_1,B_B_2_1,Age,Gender,Q390,condition,order
+Start Date,End Date,Response Type,IP Address,Progress,Duration (in seconds),Finished,Recorded Date,Response ID,Recipient Last Name,Recipient First Name,Recipient Email,External Data Reference,Location Latitude,Location Longitude,Distribution Channel,User Language,"Are you a bot?
+
+ 
+
+Liam says to Emma: ""It's a beautiful day, isn't it?""
+ 
+
+Who is Liam talking to? (case sensitive)","Are you a bot?
+
+ 
+
+Mia says to Benjamin: ""It's a beautiful day, isn't it?""
+ 
+
+Who is Mia talking to? (case sensitive)","Are you a bot?
+
+ 
+
+William says to Ava: ""It's a beautiful day, isn't it?""
+ 
+
+Who is William talking to? (case sensitive)","Are you a bot?
+
+ 
+
+Amelia says to Noah: ""It's a beautiful day, isn't it?""
+ 
+
+Who is Amelia talking to? (case sensitive)","Are you a bot?
+
+ 
+
+Evelyn says to James: ""It's a beautiful day, isn't it?""
+ 
+
+Who is Evelyn talking to? (case sensitive)","Please answer the following questions: 
+
+ 
+
+The new blood-thinning drug ""Afibo""...",The e-mail of the pharmacy manager contains the information that ...,Dr Jones did not read the e-mail ...,Dr Jones ...,"Please rate how much you agree or disagree with the following statement: 
+
+
+
+                        “Dr Jones caused the patient's leg cramps.”","The next question is concerned with your thoughts about how the course of events in the scenario you just read could have gone differently.
+
+ 
+
+In the following text box, we would like you to write down what could have gone differently so that the patient would not have suffered mild leg cramps. 
+
+ 
+
+
+(Your answer can be as short or long as you want; it does not need to fit exactly into the structure of the following example sentence.)
+
+ 
+
+
+""If __________________________________, the patient would not have suffered leg cramps.""","Please rate how much you agree or disagree with the following statement: 
+
+
+
+                                “Dr Jones could have known that Afibo causes mild leg cramps.”","Please indicate your tendency to the following question:
+
+ 
+
+""How blameworthy is Dr Jones for not knowing that Afibo causes mild leg cramps?""","Please answer the following questions: 
+
+ 
+
+The new blood-thinning drug ""Corus""...",The e-mail of the pharmacy manager contains the information that ...,Dr Smith did not read the e-mail ...,Dr Smith ...,"Please rate how much you agree or disagree with the following statement: 
+
+
+
+                    “Dr Smith caused the patient's leg cramps.”","The next question is concerned with your thoughts about how the course of events in the scenario you just read could have gone differently.
+
+ 
+
+In the following text box, we would like you to write down what could have gone differently so that the patient would not have suffered mild leg cramps. 
+
+ 
+
+
+(Your answer can be as short or long as you want; it does not need to fit exactly into the structure of the following example sentence.)
+
+ 
+
+
+""If __________________________________, the patient would not have suffered leg cramps.""","Please rate how much you agree or disagree with the following statement:
+
+
+ 
+
+“Dr Smith could have known that Corus causes mild leg cramps.”","Please indicate your tendency to the following question :
+
+ 
+
+""How blameworthy is Dr Smith for not knowing that Corus causes mild leg cramps?""","Please answer the following questions: 
+
+ 
+
+ The new fertilizer ""Splendor""...","The e-mail of the garden manager contains the information that the new fertilizer ""Splendor""...",Alex did not read the e-mail ...,Alex ...,"Please rate how much you agree or disagree with the following statement: 
+
+
+
+                  “Alex caused the Bourbon roses to die.”","The next question is concerned with your thoughts about how the course of events in the scenario you just read could have gone differently.
+
+ 
+
+In the following text box, we would like you to write down what could have gone differently so that the Bourbon roses would not have died.
+
+ 
+
+
+(Your answer can be as short or long as you want; it does not need to fit exactly into the structure of the following example sentence.)
+
+ 
+
+
+""If __________________________________, the Bourbon roses would not have died.""","Please rate how much you agree or disagree with the following statement:
+
+ 
+
+                 “Alex could have known that Splendor harms Bourbon roses.”","Please indicate your tendency towards the following question:
+
+ 
+
+""How blameworthy is Alex for not knowing that Splendor harms Bourbon roses?""","Please answer the following questions: 
+
+ 
+
+ The new fertilizer ""Nutrit""...","The e-mail of the garden manager contains the information that the new fertilizer ""Nutrit""...",Bob did not read the email...,Bob ...,"Please rate how much you agree or disagree with the following statement: 
+
+
+
+                         “Bob caused the China roses to die.”","The next question is concerned with your thoughts about how the course of events in the scenario you just read could have gone differently.
+
+ In the following text box, we would like you to write down what could have gone differently so that the China roses would not have died. (Your answer can be as short or long as you want; it does not need to fit exactly into the structure of the following example sentence.) ""If __________________________________, the China roses would not have died.""","Please rate how much you agree or disagree with the following statement:
+
+ 
+
+                       “Bob could have known that Nutrit harms China roses.”","Please indicate your tendency towards the following question:
+
+ 
+
+""How blameworthy is Bob for not knowing that Nutrit harms China roses?""","Please answer the following questions: 
+
+
+
+The new flour of the brand ""Harvest""...","The e-mail of the bakery manager contains the information that ""Harvest"" ...",Sandra did not read the email...,Sandra ...,"Please rate how much you agree or disagree with the following statement: 
+
+
+
+                          “Sandra caused the customer's allergic reaction.”","The next question is concerned with your thoughts about how the course of events in the scenario you just read could have gone differently.
+
+ 
+
+In the following text box, we would like you to write down what could have gone differently so that the customer would not have suffered an allergic reaction.
+
+ 
+
+
+(Your answer can be as short or long as you want; it does not need to fit exactly into the structure of the following example sentence.)
+
+ 
+
+
+""If ____________________________, the customer would not have suffered an allergic reaction.""","Please rate how much you agree or disagree with the following statement: 
+
+ 
+
+              “Sandra could have known that Harvest contains traces of walnuts.""","Please indicate your tendency towards the following question:
+
+ 
+""How blameworthy is Sandra for not knowing that Harvest contains traces of walnuts?""","Please answer the following questions: 
+
+
+
+The new flour of the brand ""Homestead"" ...","The e-mail of the bakery manager contains the information that ""Homestead"" ...",Anne did not read the email...,Anne ...,"Please rate how much you agree or disagree with the following statement: 
+
+
+
+                         “Anne caused the customer's allergic reaction.”","The next question is concerned with your thoughts about how the course of events in the scenario you just read could have gone differently. In the following text box, we would like you to write down what could have gone differently so that the customer would not have suffered an allergic reaction. (Your answer can be as short or long as you want; it does not need to fit exactly into the structure of the following example sentence.) ""If ____________________________, the customer would not have suffered an allergic reaction.""","Please rate how much you agree or disagree with the following statement: 
+
+ 
+
+              “Anne could have known that Homestead contains traces of hazelnuts.""","Please indicate your tendency towards the following question:
+
+ 
+
+""How blameworthy is Anne for not knowing that Homestead contains traces of hazelnuts?""","What is your age? (U.S. Census, 9 Categories)",What is your gender?,"Please comment if you had any issues with the survey.
+Then click on the arrow to receive your payment code.",condition,order
+"{""ImportId"":""startDate"",""timeZone"":""Europe/London""}","{""ImportId"":""endDate"",""timeZone"":""Europe/London""}","{""ImportId"":""status""}","{""ImportId"":""ipAddress""}","{""ImportId"":""progress""}","{""ImportId"":""duration""}","{""ImportId"":""finished""}","{""ImportId"":""recordedDate"",""timeZone"":""Europe/London""}","{""ImportId"":""_recordId""}","{""ImportId"":""recipientLastName""}","{""ImportId"":""recipientFirstName""}","{""ImportId"":""recipientEmail""}","{""ImportId"":""externalDataReference""}","{""ImportId"":""locationLatitude""}","{""ImportId"":""locationLongitude""}","{""ImportId"":""distributionChannel""}","{""ImportId"":""userLanguage""}","{""ImportId"":""QID37_TEXT""}","{""ImportId"":""QID38_TEXT""}","{""ImportId"":""QID39_TEXT""}","{""ImportId"":""QID40_TEXT""}","{""ImportId"":""QID41_TEXT""}","{""ImportId"":""QID433""}","{""ImportId"":""QID466""}","{""ImportId"":""QID356""}","{""ImportId"":""QID454""}","{""ImportId"":""QID173_1""}","{""ImportId"":""QID441_TEXT""}","{""ImportId"":""QID461_1""}","{""ImportId"":""QID456_1""}","{""ImportId"":""QID435""}","{""ImportId"":""QID467""}","{""ImportId"":""QID398""}","{""ImportId"":""QID457""}","{""ImportId"":""QID400_1""}","{""ImportId"":""QID444_TEXT""}","{""ImportId"":""QID458_1""}","{""ImportId"":""QID459_1""}","{""ImportId"":""QID437""}","{""ImportId"":""QID468""}","{""ImportId"":""QID403""}","{""ImportId"":""QID470""}","{""ImportId"":""QID405_1""}","{""ImportId"":""QID446_TEXT""}","{""ImportId"":""QID471_1""}","{""ImportId"":""QID472_1""}","{""ImportId"":""QID439""}","{""ImportId"":""QID474""}","{""ImportId"":""QID408""}","{""ImportId"":""QID475""}","{""ImportId"":""QID410_1""}","{""ImportId"":""QID448_TEXT""}","{""ImportId"":""QID476_1""}","{""ImportId"":""QID477_1""}","{""ImportId"":""QID423""}","{""ImportId"":""QID478""}","{""ImportId"":""QID413""}","{""ImportId"":""QID479""}","{""ImportId"":""QID415_1""}","{""ImportId"":""QID450_TEXT""}","{""ImportId"":""QID480_1""}","{""ImportId"":""QID481_1""}","{""ImportId"":""QID426""}","{""ImportId"":""QID482""}","{""ImportId"":""QID428""}","{""ImportId"":""QID483""}","{""ImportId"":""QID430_1""}","{""ImportId"":""QID452_TEXT""}","{""ImportId"":""QID484_1""}","{""ImportId"":""QID485_1""}","{""ImportId"":""QID421_TEXT""}","{""ImportId"":""QID422""}","{""ImportId"":""QID390_TEXT""}","{""ImportId"":""condition""}","{""ImportId"":""order""}"
+2020-09-10 18:33:56,2020-09-10 18:39:43,0,184.155.125.61,100,346,1,2020-09-10 18:39:43,R_2Eo5BnMi39NEtIa,,,,,43.5861968994140625,-116.5872955322265625,anonymous,EN,,,Ava,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,5,had been more careful with her emails,5,5,1,1,2,2,7,Anne had checked her emails like she was supposed to,7,7,22,2,,3,1
+2020-09-10 18:35:58,2020-09-10 18:40:25,0,98.167.113.206,100,267,1,2020-09-10 18:40:25,R_NX5evWYBqcClHvb,,,,,36.0113067626953125,-115.20379638671875,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,2,the bakery manager would have told the information about the flour face to face,1,2,1,1,2,2,6,Anne did her job and read the email,7,6,36,2,,3,1
+2020-09-10 18:33:58,2020-09-10 18:40:42,0,47.30.139.179,100,404,1,2020-09-10 18:40:42,R_3IQ7d36wBq99QXQ,,,,,28.6519012451171875,77.23150634765625,anonymous,EN,,,,Noah,,1,1,1,2,3,Upgraded email service had not developed bug,2,2,1,1,2,2,6,Dr Smith had chosen to read email and taken action accordingly,6,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27,1,,1,1
+2020-09-10 18:34:41,2020-09-10 18:40:51,0,97.84.226.92,100,370,1,2020-09-10 18:40:51,R_2tfHRH8Rn0pVwjW,,,,,43.1772003173828125,-85.2472991943359375,anonymous,EN,,,,,James,,,,,,,,,,,,,,,,,1,1,1,2,4,"Alex's email worked properly, he could have read the email and",1,1,1,1,2,2,5,Bob had read his email,1,5,,,,,,,,,,,,,,,,,41,1,,2,2
+2020-09-10 18:38:19,2020-09-10 18:40:59,0,173.94.105.255,100,159,1,2020-09-10 18:40:59,R_31MFj94KXfzkLq5,,,,,36.1824951171875,-79.810302734375,anonymous,EN,,,Ava,,,,,,,,,,,,,,,,,,,1,1,1,2,6,If he read the email,6,4,1,1,2,2,6,he had read the email,7,6,,,,,,,,,,,,,,,,,23,2,,2,1
+2020-09-10 18:37:26,2020-09-10 18:42:09,0,71.112.131.213,100,283,1,2020-09-10 18:42:10,R_3NUFNxMUaOwGu05,,,,,40.346893310546875,-79.868896484375,anonymous,EN,,,,,James,1,1,1,2,7,the e-mail didn't have a bug and send the e-mail to spam...,1,4,1,1,2,2,7,the doctor would have read the e-mail...,7,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,36,2,n/a,1,2
+2020-09-10 18:33:59,2020-09-10 18:42:13,0,107.9.150.178,100,493,1,2020-09-10 18:42:13,R_7VQ3WmjCYwmOVvX,,,,,41.4600067138671875,-82.17479705810546875,anonymous,EN,Emma,,,,,1,1,1,2,1,The email had not been marked as spam.,2,1,1,1,2,2,5,Dr. Smith had read the email from the pharmacy manager,2,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,34,1,,1,2
+2020-09-10 18:37:19,2020-09-10 18:43:33,0,64.83.232.16,100,373,1,2020-09-10 18:43:33,R_2ON2SF416znUwpY,,,,,44.009002685546875,-92.393402099609375,anonymous,EN,,,Ava,,,1,1,1,2,6,"Dr. Jones has read the email from the manager,",1,6,1,1,2,2,7,Dr. Smith has got a chance to read the email,1,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,44,1,none,1,1
+2020-09-10 18:41:20,2020-09-10 18:46:09,0,24.180.138.70,100,289,1,2020-09-10 18:46:10,R_2boAv8yp7wEnNYt,,,,,43.1772003173828125,-85.2472991943359375,anonymous,EN,Emma,,,,,1,1,1,2,1,the email would not have been marked as spam,1,1,1,1,2,2,7,Dr Smith would have read their email,1,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,39,1,,1,1
+2020-09-10 18:46:28,2020-09-10 18:46:45,0,167.88.60.250,100,17,1,2020-09-10 18:46:45,R_33rK23zLgdChVUn,,,,,37.393096923828125,-121.962005615234375,anonymous,EN,,,ava,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2020-09-10 18:37:58,2020-09-10 18:50:20,0,174.204.79.149,100,742,1,2020-09-10 18:50:20,R_3Hn5neGOTkrTnAx,,,,,47.6858978271484375,-122.29940032958984375,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,1,Sandra Email provider worked correctly,6,1,1,1,2,2,4,Anne would have read the email then,6,4,27,1,N/A,3,2
+2020-09-10 18:46:49,2020-09-10 18:53:26,0,167.88.60.250,100,396,1,2020-09-10 18:53:26,R_3p5pjHc0CUhixww,,,,,37.393096923828125,-121.962005615234375,anonymous,EN,Emma,,,,,1,2,1,1,6,treating suffer,6,5,1,2,1,1,6,Dr Smith sees that,5,6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29,2,It is interesting.,1,1
+2020-09-10 18:45:13,2020-09-10 18:53:39,0,35.137.59.85,100,505,1,2020-09-10 18:53:39,R_2XccCLgtRDDVENc,,,,,27.9600067138671875,-82.46140289306640625,anonymous,EN,,,,,James,,,,,,,,,,,,,,,,,1,1,1,2,7,"The manager told Alex directly. If it didn't go in the spam folder by accident. If Alex read his spam folder. If the fertilizer said it would ""Kill Bourbon Roses"" on the container.",7,4,1,1,2,2,7,"the manager wrote something in the title of the email to alert everyone to the importance of the email. The fertilizer could say it in big print ""KILLS CHINA ROSES""
+The manager could have told Bob directly
+Bob could have read the email.",7,7,,,,,,,,,,,,,,,,,60,2,none,2,2
+2020-09-10 18:45:22,2020-09-10 18:54:56,0,24.233.108.39,100,574,1,2020-09-10 18:54:57,R_2DLZkAnRkQKZpOd,,,,,43.2873992919921875,-71.33519744873046875,anonymous,EN,,Benjamin,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,5,"If the email wasnt automatically tossed in the spam folder, the customer would not have suffered an allergic reaction.",1,3,1,1,2,2,7,"If Anne had bothered to read the email, the customer would not have suffered an allergic reaction.",7,7,43,1,,3,1
+2020-09-10 18:51:04,2020-09-10 18:55:03,0,75.161.208.90,100,238,1,2020-09-10 18:55:03,R_1DHJry9JXQTrzGP,,,,,35.11309814453125,-106.57810211181640625,anonymous,EN,Emma,,,,,,,,,,,,,,,,,,,,,1,1,1,2,4,Alex had asked about the new fertilizer before using it,6,3,1,1,2,2,7,Bob had simply read the email,7,7,,,,,,,,,,,,,,,,,36,1,None.,2,2
+2020-09-10 18:52:34,2020-09-10 18:56:21,0,67.1.144.238,100,227,1,2020-09-10 18:56:21,R_1IQxxTfxUjb0Fy7,,,,,32.25030517578125,-110.94499969482421875,anonymous,EN,Emma,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,2,Sandra saw the email,3,3,1,1,2,2,4,Anne would have read the email,4,4,42,1,,3,1
+2020-09-10 18:55:26,2020-09-10 18:58:43,0,167.88.60.250,100,196,1,2020-09-10 18:58:43,R_3LjWEjDJf2YiD3o,,,,,37.393096923828125,-121.962005615234375,anonymous,EN,,,,,James,1,2,1,2,6,Dr Jones is treating a patient,6,6,1,1,2,1,6," Dr Smith does not know that",5,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29,2,No comments.,1,2
+2020-09-10 18:55:09,2020-09-10 19:01:32,0,174.204.74.92,100,382,1,2020-09-10 19:01:32,R_2SCtPDAlmhiyNAh,,,,,47.3957061767578125,-122.3036041259765625,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,1,1,1,2,1,If his email provider would not have upgraded the service then there would not have been a bug that marked the important email as spam automatically and the Bourbon roses would not have died.,1,1,1,1,2,2,7,"If he would have just read the email containing the info about the new fertilizer, the China roses would not have died.",7,7,,,,,,,,,,,,,,,,,27,1,,2,2
+2020-09-10 18:54:29,2020-09-10 19:04:43,0,68.10.170.191,100,614,1,2020-09-10 19:04:43,R_2xGf5aDNoW3ixqE,,,,,36.9456024169921875,-76.253997802734375,anonymous,EN,,,Ava,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,7,"If Sandra had read actually received the email, she would've known that Harvest contained traces of walnut. ",1,1,1,1,2,2,7,"If Anne would've opened her email, she would've known that the flour contained Hazlenuts. She neglected to read the email, and should take full blame. ",1,5,36,2,,3,1
+2020-09-10 19:00:00,2020-09-10 19:05:02,0,174.104.16.14,100,301,1,2020-09-10 19:05:03,R_3kq9vmMidPbC4ks,,,,,40.84710693359375,-81.38770294189453125,anonymous,EN,,,,Noah,,1,1,1,2,7,if the drug company had not made a mistake with Dr Smiths email.,7,1,1,1,2,2,7,"Dr Smith had read his emails he would have known ",7,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,70,1,none,1,2
+2020-09-10 19:02:25,2020-09-10 19:07:21,0,98.22.167.159,100,296,1,2020-09-10 19:07:22,R_1JOYqJSXxhy3ZNR,,,,,36.0431976318359375,-95.80719757080078125,anonymous,EN,,,,,James,1,1,1,2,2,The bug wasn't present in the system,4,2,1,1,2,2,7,The doctor read the email,7,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27,1,,1,1
+2020-09-10 19:07:53,2020-09-10 19:12:56,0,107.11.182.13,100,302,1,2020-09-10 19:13:00,R_5jy8MpDyrSDfx85,,,,,40.2738037109375,-81.86620330810546875,anonymous,EN,,,,,James,,,,,,,,,,,,,,,,,1,1,1,2,7,the email had not gone to spam,4,1,1,1,2,2,7,Bob had read the email,7,7,,,,,,,,,,,,,,,,,45,2,,2,2
+2020-09-10 19:03:23,2020-09-10 19:12:56,0,51.81.232.163,100,572,1,2020-09-10 19:13:00,R_3MaJsdQiDThaAcH,,,,,37.751007080078125,-97.82199859619140625,anonymous,EN,,,,,James,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,4,the mail had no bug,2,2,1,1,2,2,6,Anne had read the mail,6,7,27,1,,3,2
+2020-09-10 19:21:22,2020-09-10 19:28:59,0,68.200.0.97,100,456,1,2020-09-10 19:28:59,R_3UBwrcHBXRXvCDf,,,,,28.8722991943359375,-82.34539794921875,anonymous,EN,,,,Noah,,1,1,1,2,6,Dr Jones had done more research on the new drug,7,7,1,1,2,2,6,"Dr Smith had read the email, and gave the patient Sanquin",7,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,54,1,Everything was fine.,1,2
+2020-09-10 19:23:43,2020-09-10 19:30:52,0,73.12.238.214,100,429,1,2020-09-10 19:30:53,R_BxKEwWyAcFdW6uR,,,,,38.5724945068359375,-121.4701995849609375,anonymous,EN,,,Ava,,,1,1,1,1,4,that the patient has blood type,4,6,1,1,1,1,4,Checking the patient’s medical record,4,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,25,1,None,1,1
+2020-09-10 19:37:04,2020-09-10 19:49:03,0,49.205.83.207,100,718,1,2020-09-10 19:49:03,R_WDnHwsJubvbiTeN,,,,,13.087799072265625,80.27850341796875,anonymous,EN,,,,,James,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,3,That the customer would not have suffered an allergic reaction.,4,3,1,1,2,2,4,The customer would not have suffered an allergic reaction.,3,5,28,2,No,3,1
+2020-09-10 19:54:54,2020-09-10 19:58:31,0,24.239.91.36,100,217,1,2020-09-10 19:58:31,R_1o0Tk9741f291J0,,,,,41.0995941162109375,-80.75229644775390625,anonymous,EN,,,,Noah,,1,1,1,2,1,"If the doctor had known about the bug in the email system they could have checked the spam folder and the patient would not have suffered leg cramps. ",3,2,1,1,2,2,7,If the doctor had read the email then the patient would not suffer mild leg cramps.,7,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,38,2,NA,1,2
+2020-09-10 18:38:18,2020-09-10 20:12:07,0,66.28.225.178,100,5628,1,2020-09-10 20:12:07,R_3lxCe6Q3lmRGhGS,,,,,29.5720062255859375,-95.54000091552734375,anonymous,EN,,,Ava,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,1,the email didn't mark it as spam,5,3,1,1,2,2,4,Anne read the email,7,2,27,1,,3,2
+2020-09-10 20:08:48,2020-09-10 20:14:09,0,73.236.40.189,100,321,1,2020-09-10 20:14:09,R_1PXjJVXpJFHEPh7,,,,,40.9958038330078125,-80.3264007568359375,anonymous,EN,,Benjamin,,,,,,,,,,,,,,,,,,,,1,1,1,2,5,the manager had confirmed reciept of the e-mail or had a follow up discussion with Alex about the fertilizer,4,1,1,1,2,2,7,Bob had read the email from his manager about the new fertilizer,4,7,,,,,,,,,,,,,,,,,60,1,,2,1
+2020-09-10 20:10:47,2020-09-10 20:17:25,0,71.14.181.135,100,397,1,2020-09-10 20:17:25,R_2chYpzXhY0Z5YUf,,,,,38.5792999267578125,-90.4219970703125,anonymous,EN,Emma,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,3,"If the e-mail provider had treated the message properly, then Sandra would have known and not used the flour for that particular order and the customer would not have suffered an allergic reaction.",2,1,1,1,2,2,6,"If Anne had read the e-mail she would have known that the flour had traces of hazelnuts and would not have used it for the order from the nut allergic customer and s/he would not have had the reaction. ",7,6,51,2,,3,2
+2020-09-10 20:21:27,2020-09-10 20:26:51,0,24.159.219.194,100,324,1,2020-09-10 20:26:52,R_1O0uAITJWzVi4A9,,,,,44.1649017333984375,-94.01490020751953125,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,1,1,1,2,7,Alex had gotten the email,1,1,1,1,2,2,7,Bob had read his email,7,7,,,,,,,,,,,,,,,,,33,1,"none, thank you",2,1
+2020-09-10 20:35:06,2020-09-10 20:38:30,0,50.83.153.216,100,204,1,2020-09-10 20:38:30,R_1lt02hMWmHq3dPm,,,,,39.4795989990234375,-88.3755035400390625,anonymous,EN,,,,,James,1,1,1,2,2,"the dr had checked for the email in the spam folder, then maybe ",5,2,1,1,2,2,3,"she had read the email, she would not have given that drug and ",7,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,41,1,,1,2
+2020-09-10 20:35:07,2020-09-10 20:39:10,0,24.208.188.198,100,243,1,2020-09-10 20:39:10,R_3OlI7Yale7HyFwU,,,,,40.7415924072265625,-84.15219879150390625,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,1,the customer asked Sandra to check if the flour contained walnuts then,7,1,1,1,2,2,7,the customer asked Anne to check the flour to see if it was safe then,6,5,39,1,,3,1
+2020-09-10 20:39:41,2020-09-10 20:45:34,0,98.127.137.72,100,352,1,2020-09-10 20:45:34,R_2QflPFAQpOK5z4V,,,,,46.609893798828125,-112.0243988037109375,anonymous,EN,,,,,James,,,,,,,,,,,,,,,,,1,1,1,2,2,the service provider had not erroneously marked the email as spam,3,4,1,1,2,2,7,"Bob had read his email, he would not have used the nutrit on the china roses and",7,7,,,,,,,,,,,,,,,,,48,1,,2,2
+2020-09-10 20:43:30,2020-09-10 20:46:08,0,98.235.48.150,100,157,1,2020-09-10 20:46:09,R_2RWAOT3NUvKD6sY,,,,,40.2615966796875,-76.64679718017578125,anonymous,EN,Emma,,,,,1,1,1,2,5,"Dr. Jones' email had not deleted the email (marked as spam), he would have known the side effects and",4,5,1,1,2,2,6,Dr Smith had read the email from the pharmacy,6,6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,48,1,,1,1
+2020-09-10 20:52:31,2020-09-10 21:00:24,0,70.170.30.248,100,473,1,2020-09-10 21:00:24,R_2WHKL2DkUsJlPVP,,,,,36.0906982421875,-115.08860015869140625,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,2,The email was not marked as spam ( in error) the problem would not have occurred.,3,2,1,1,2,2,5,The bakery could have posted a sign stating the new flour was not nut friendly.,6,6,50,1,All good !,3,2
+2020-09-10 21:11:26,2020-09-10 21:16:26,0,98.255.239.86,100,300,1,2020-09-10 21:16:26,R_3m8iVYSvxVV7mGX,,,,,37.3256988525390625,-120.49990081787109375,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,5,Sandra had verified with the manager that the flour did not contain nuts before using the new flour brand,6,4,1,1,2,2,7,"Anne had read the email ",7,7,38,1,,3,2
+2020-09-10 20:51:44,2020-09-10 21:38:14,0,110.224.208.251,100,2790,1,2020-09-10 21:38:15,R_3ndcVK63M8Y49h2,,,,,22.7165069580078125,75.8307037353515625,anonymous,EN,,,,,James,,,,,,,,,,,,,,,,,1,1,1,2,1,"alex read that email where is said that splendor would harm the bourbon roses then ",1,1,1,1,2,2,5,bob wasn't complacent and actually read the email which was sent to him then,6,5,,,,,,,,,,,,,,,,,26,1,,2,1
+2020-09-10 21:19:24,2020-09-10 21:41:15,0,72.10.150.139,100,1311,1,2020-09-10 21:41:15,R_2qa4Q0k4rwRpzLT,,,,,46.83160400390625,-71.244598388671875,anonymous,EN,,Benjamin,,,,1,1,1,2,6,Dr Jones had check the spam mail like any professional that deal with the life of peoples would do nowadays,6,7,1,1,2,2,7,dr Smith had read the email of the pharmacist she would have known that Corus is  contraindicated for people with blood type B-negative so,7,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,37,1,,1,1
+2020-09-10 21:51:41,2020-09-10 21:56:15,0,71.211.153.198,100,274,1,2020-09-10 21:56:16,R_1FwZYE88l127YHY,,,,,39.7628021240234375,-105.02629852294921875,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,2,The email provider had correctly configured their systems or the flour provider have been more proactive about labeling or calling.,1,2,1,1,2,2,5,The supplier of the flour could have indicated the change on the packaging or called the baker instead of sending an email.,7,5,36,1,,3,2
+2020-09-10 22:52:46,2020-09-10 22:59:09,0,201.29.118.211,100,382,1,2020-09-10 22:59:09,R_2ZWFOgiL2mztVD2,,,,,-22.92010498046875,-43.3307037353515625,anonymous,EN,,,,,Jaimes,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,2,"If the manager were more attentive and tried other ways of communicating with his employees, the customer would not have suffered an allergic reaction.
+",1,1,1,1,2,2,4,"If Ana were more attentive to her email box and the manager was more attentive when talking about the exchange of products due to the possibilities of adverse reactions given the ability of this new product to cause inconvenience to the customers of her collaborator
+",6,3,22,1,,3,2
+2020-09-10 21:28:14,2020-09-10 23:22:48,0,72.231.155.250,100,6873,1,2020-09-10 23:22:49,R_28YBtCtC7o3b29i,,,,,42.909698486328125,-76.79340362548828125,anonymous,EN,,,Ava,,,,,,,,,,,,,,,,,,,1,1,1,2,5,Alex checked his e-mail's spam folder,4,3,1,1,2,2,6,bob read the email from the garden manager,6,5,,,,,,,,,,,,,,,,,29,1,,2,2
+2020-09-11 00:22:57,2020-09-11 00:27:28,0,12.185.249.141,100,270,1,2020-09-11 00:27:28,R_2meBn6VFQDRegYF,,,,,32.8983001708984375,-96.1260986328125,anonymous,EN,,,,Noah,,1,1,1,2,4,If Dr Jones had researched about the drug rather than just relying on an email then the doctor would know about the cramps.,5,5,1,1,1,2,5,"If she researched the drug herself, she would have known about the leg cramps",5,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27,1,,1,1
+2020-09-11 00:16:20,2020-09-11 00:45:23,0,72.189.104.88,100,1742,1,2020-09-11 00:45:23,R_O28CcYoXZcUXh9n,,,,,28.4882965087890625,-81.406097412109375,anonymous,EN,,Benjamin,,,,,,,,,,,,,,,,,,,,1,1,1,2,4,the email had not been marked as spam,7,3,1,1,2,2,7,Bob had read the email when he saw it,7,6,,,,,,,,,,,,,,,,,31,1,,2,2
+2020-09-10 19:28:28,2020-09-10 19:31:19,0,106.211.227.80,51,170,0,2020-09-11 13:46:51,R_1jVUrcpk4sjtyR5,,,,,,,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,2
+2020-09-10 19:20:32,2020-09-10 19:24:26,0,108.193.234.137,99,234,0,2020-09-11 13:47:14,R_2SHrj4s1ETCooKJ,,,,,,,anonymous,EN,,,Ava,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,2,5,the manager could have informed all the bakers in person that the new flour contained walnuts,1,4,1,1,2,2,5,Anne could have read the email from the bakery manager,7,5,40,2,,3,1
+2020-09-10 22:00:30,2020-09-10 22:38:06,0,179.159.20.204,5,2255,0,2020-09-11 13:47:15,R_3R1pQ87YNzLgKa1,,,,,,,anonymous,EN,,,Ava,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1
+2020-09-10 18:27:24,2020-09-10 18:33:41,0,134.76.0.125,36,376,0,2020-09-11 13:47:16,R_7aL7oaR1qyF9yVj,,,,,,,anonymous,EN,,,,Noah,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1
+2020-09-10 18:57:43,2020-09-10 19:20:47,0,66.31.48.108,99,1384,0,2020-09-11 13:47:25,R_1OT5xMbf0ndV9EP,,,,,,,anonymous,EN,Emma,,,,,,,,,,,,,,,,,,,,,1,1,1,2,2,Alex didnt apply the Splendor fertilizer then,5,3,1,1,2,2,3,If Bob read the email sent by the manager then,5,4,,,,,,,,,,,,,,,,,29,2,,2,1
+2020-09-10 18:36:16,2020-09-10 18:37:19,0,174.204.88.199,51,62,0,2020-09-11 13:47:38,R_1FXwuENxY3Shcu5,,,,,,,anonymous,EN,,,,,James,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,2
+2020-09-10 19:22:05,2020-09-10 19:24:54,0,216.186.159.106,36,168,0,2020-09-11 13:47:39,R_D0nRjvW2WmFy4pj,,,,,,,anonymous,EN,,Benjamin,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2,1
+2020-09-10 21:57:03,2020-09-10 21:59:47,0,173.198.160.217,9,164,0,2020-09-11 13:47:39,R_237DWvdJQC11rvy,,,,,,,anonymous,EN,,Benjamin,,,,1,1,1,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1

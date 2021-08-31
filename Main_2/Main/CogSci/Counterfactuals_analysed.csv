@@ -1,0 +1,159 @@
+,participant,condition,scenario,cf_externally_caused,code_1,detailed_1,cf_self_caused,code_2,detailed_2
+1,1,3,bakery,had been more careful with her emails,2_5,2_5,Anne had checked her emails like she was supposed to,2_2,2_2
+2,2,3,bakery,the bakery manager would have told the information about the flour face to face,2_4,2_4,Anne did her job and read the email,2_2,2_2
+3,3,1,hospital,Upgraded email service had not developed bug,2_3,2_3,Dr Smith had chosen to read email and taken action accordingly,2_2,2_2
+4,4,2,garden,"Alex's email worked properly, he could have read the email and",2_3,2_3,Bob had read his email,2_2,2_2
+5,5,2,garden,If he read the email,2_2,2_2,he had read the email,2_2,2_2
+6,6,1,hospital,the e-mail didn't have a bug and send the e-mail to spam...,2_3,2_3,the doctor would have read the e-mail...,2_2,2_2
+7,7,1,hospital,The email had not been marked as spam.,2_3,2_3,Dr. Smith had read the email from the pharmacy manager,2_2,2_2
+8,8,1,hospital,"Dr. Jones has read the email from the manager,",2_2,2_2,Dr. Smith has got a chance to read the email,2_2,2_2
+9,9,1,hospital,the email would not have been marked as spam,2_3,2_3,Dr Smith would have read their email,2_2,2_2
+10,10,3,bakery,Sandra Email provider worked correctly,2_3,2_3,Anne would have read the email then,2_2,2_2
+11,12,2,garden,"The manager told Alex directly. If it didn't go in the spam folder by accident. If Alex read his spam folder. If the fertilizer said it would ""Kill Bourbon Roses"" on the container.",2_4,2_4,"the manager wrote something in the title of the email to alert everyone to the importance of the email. The fertilizer could say it in big print ""KILLS CHINA ROSES""
+The manager could have told Bob directly
+Bob could have read the email.",2_4,2_4
+12,13,3,bakery,"If the email wasnt automatically tossed in the spam folder, the customer would not have suffered an allergic reaction.",2_3,2_3,"If Anne had bothered to read the email, the customer would not have suffered an allergic reaction.",2_2,2_2
+13,14,2,garden,Alex had asked about the new fertilizer before using it,2_5,2_5,Bob had simply read the email,2_2,2_2
+14,15,3,bakery,Sandra saw the email,2_2,2_2,Anne would have read the email,2_2,2_2
+15,17,2,garden,If his email provider would not have upgraded the service then there would not have been a bug that marked the important email as spam automatically and the Bourbon roses would not have died.,2_3,2_3,"If he would have just read the email containing the info about the new fertilizer, the China roses would not have died.",2_2,2_2
+16,18,3,bakery,"If Sandra had read actually received the email, she would've known that Harvest contained traces of walnut. ",2_3,2_3,"If Anne would've opened her email, she would've known that the flour contained Hazlenuts. She neglected to read the email, and should take full blame. ",2_2,2_2
+17,19,1,hospital,if the drug company had not made a mistake with Dr Smiths email.,2_3,2_3,Dr Smith had read his emails he would have known ,2_2,2_2
+18,20,1,hospital,The bug wasn't present in the system,2_3,2_3,The doctor read the email,2_2,2_2
+19,21,2,garden,the email had not gone to spam,2_3,2_3,Bob had read the email,2_2,2_2
+20,22,3,bakery,the mail had no bug,2_3,2_3,Anne had read the mail,2_2,2_2
+21,23,1,hospital,Dr Jones had done more research on the new drug,2_5,2_5,"Dr Smith had read the email, and gave the patient Sanquin",2_2,2_2
+22,25,3,bakery,That the customer would not have suffered an allergic reaction.,0,0,The customer would not have suffered an allergic reaction.,0,0
+23,26,1,hospital,If the doctor had known about the bug in the email system they could have checked the spam folder and the patient would not have suffered leg cramps. ,2_6,2_6,If the doctor had read the email then the patient would not suffer mild leg cramps.,2_2,2_2
+24,27,3,bakery,the email didn't mark it as spam,2_3,2_3,Anne read the email,2_2,2_2
+25,28,2,garden,the manager had confirmed reciept of the e-mail or had a follow up discussion with Alex about the fertilizer,2_4,2_4,Bob had read the email from his manager about the new fertilizer,2_2,2_2
+26,29,3,bakery,"If the e-mail provider had treated the message properly, then Sandra would have known and not used the flour for that particular order and the customer would not have suffered an allergic reaction.",2_3,2_3,If Anne had read the e-mail she would have known that the flour had traces of hazelnuts and would not have used it for the order from the nut allergic customer and s/he would not have had the reaction. ,2_2,2_2
+27,30,2,garden,Alex had gotten the email,2_3,2_3,Bob had read his email,2_2,2_2
+28,31,1,hospital,"the dr had checked for the email in the spam folder, then maybe ",X,2_5,"she had read the email, she would not have given that drug and ",2_2,2_2
+29,32,3,bakery,the customer asked Sandra to check if the flour contained walnuts then,2_4,2_4,the customer asked Anne to check the flour to see if it was safe then,2_4,2_4
+30,33,2,garden,the service provider had not erroneously marked the email as spam,2_3,2_3,"Bob had read his email, he would not have used the nutrit on the china roses and",2_2,2_2
+31,34,1,hospital,"Dr. Jones' email had not deleted the email (marked as spam), he would have known the side effects and",2_3,2_3,Dr Smith had read the email from the pharmacy,2_2,2_2
+32,35,3,bakery,The email was not marked as spam ( in error) the problem would not have occurred.,2_3,2_3,The bakery could have posted a sign stating the new flour was not nut friendly.,2_4,2_4
+33,36,3,bakery,Sandra had verified with the manager that the flour did not contain nuts before using the new flour brand,2_5,2_5,Anne had read the email ,2_2,2_2
+34,37,2,garden,alex read that email where is said that splendor would harm the bourbon roses then ,2_2,2_2,bob wasn't complacent and actually read the email which was sent to him then,2_2,2_2
+35,38,1,hospital,Dr Jones had check the spam mail like any professional that deal with the life of peoples would do nowadays,X,2_5,dr Smith had read the email of the pharmacist she would have known that Corus is  contraindicated for people with blood type B-negative so,2_2,2_2
+36,39,3,bakery,The email provider had correctly configured their systems or the flour provider have been more proactive about labeling or calling.,2_3,2_3,The supplier of the flour could have indicated the change on the packaging or called the baker instead of sending an email.,2_4,2_4
+37,40,3,bakery,"If the manager were more attentive and tried other ways of communicating with his employees, the customer would not have suffered an allergic reaction.
+",2_4,2_4,"If Ana were more attentive to her email box and the manager was more attentive when talking about the exchange of products due to the possibilities of adverse reactions given the ability of this new product to cause inconvenience to the customers of her collaborator
+",2_2,2_2
+38,41,2,garden,Alex checked his e-mail's spam folder,X,2_5,bob read the email from the garden manager,2_2,2_2
+39,43,2,garden,the email had not been marked as spam,2_3,2_3,Bob had read the email when he saw it,2_2,2_2
+40,44,3,bakery,the manager could have informed all the bakers in person that the new flour contained walnuts,2_4,2_4,Anne could have read the email from the bakery manager,2_2,2_2
+41,45,2,garden,Alex didnt apply the Splendor fertilizer then,1,1_1,If Bob read the email sent by the manager then,2_2,2_2
+42,46,2,garden,Alex got the email and read it,2_3,2_3,Bob knew that Nutrit harmed the roses,2_1,2_1
+43,47,3,bakery,sandra would of been informed properly ,2_4,2_4,anne would of checked her emails and actually read them,2_2,2_2
+44,48,3,bakery,The email had been sent and read properly.,2_3,2_3,Anne had read the email,2_2,2_2
+45,49,2,garden,"Alex had done a little research, he probably would not have used Splendor, and",2_5,2_5,Bob would have read his email,2_2,2_2
+46,50,3,bakery,If Sandra had gotten the information from the baker that they changed flour and the new flour contains traces of walnuts the customer would not have suffered an allergic reaction.,2_4,2_4,"If Anne would have read her email, like she is supposed to do she would have known the new flour contained traces of hazelnut and the customer would not have suffered an allergic reaction.",2_2,2_2
+47,51,1,hospital,"the IT department had effectively checked for bug in the new software,",2_3,2_3,Dr. Smith had read the email about Corus,2_2,2_2
+48,52,1,hospital,Dr Jones would have looked in her spam folder,X,2_5,Dr Smith would have read the message ,2_2,2_2
+49,53,3,bakery,"if they had sent out multiple emails or messages elsewhere to notify people, or had them run a news story on it, or put out an fda emergency alert, the customer would not have suffered an allergic reaction",2_4,2_4,"she had just read the email or they had marked the subject line ""emergency, please read"", ",2_2,2_2
+50,54,3,bakery,the email server did not have a bug,2_3,2_3,Anne had read the email,2_2,2_2
+51,55,1,hospital,Dr. Jones would have taken the initiative to learn about side effects of Afibo,2_5,2_5,would have read the important email,2_2,2_2
+52,56,3,bakery,the bakery manager had made sure that all the employees knew that the bakery changed flour and the new flour had traces of nuts,2_4,2_4,"the bakery manager had made sure that everyone working in the bakery knew the new flour contained nuts rather than just assume everyone got, read, and comprehended an email ",2_2,2_4
+53,57,1,hospital,"If Dr. Jones email had not been upgraded and she received and read the email from the pharmacy manager, the patient would not have suffered leg cramps.",2_3,2_3,If Dr. Smith had not prescribed Corus the patient would not have suffered leg cramps. ,1,1_1
+54,58,1,hospital,"If Dr. Jones had received and read the email about Afibo causing mild leg cramps in patients who are AB-positive blood types, she would not have prescribed Afibo to this person, and...",2_3,2_3,"If Dr. Smith had read the email informing her that Corus causes mild leg cramps in blood type B-negative patients, she would not have prescribed Corus to this person, and...",2_2,2_2
+55,59,1,hospital,dr jones did not administer the drug,1,1_1,did not take the blood thinner,1,1_1
+56,60,1,hospital,the email provider had detected the software bug so that the doctor would see the email,2_3,2_3,D. Smith had read the email,2_2,2_2
+57,61,1,hospital,"Dr Smith had read the email, if the email system hadn't have been upgraded, if the email hadn't have been marked as spam",2_3,2_3,Dr Smith had read the email; Dr Smith had prescribed the more expensive medication,2_2,2_2
+58,62,1,hospital,"If the email service that Dr. Jones uses would have worked properly, Dr. Jones would have seen the email that stated the drug caused leg cramps.",2_3,2_3,Dr. Smith needed to read the email from the pharmacist so that they knew the side effects of the drug that they were administering. ,2_2,2_2
+59,63,3,bakery,a written communication was sent along with email,2_5,2_5,Anne had read the email,2_2,2_2
+60,64,2,garden,Alex had known that the new fertilizer would harm the Bourbon roses,2_1,2_1,Bob had read the information about it ,2_2,2_2
+61,66,3,bakery,"the bakery manager had not only sent an e-mail about the new White Mill flour, but also posted a note/memo on the company bulletin board about the flour, ",2_4,2_4,Anne had read her e-mail from the bakery manager she wouldn't have used the nut ladened flour and ,2_2,2_2
+62,67,2,garden,Alex had been adequately informed about the toxic fertilizer,2_4,2_4,Bob had read the email and realized that the fertilizer harmed the roses ,2_2,2_2
+63,68,2,garden,Alex hadn't upgraded his email,2_3,2_3,Bob had read the email that was sent to him,2_2,2_2
+64,69,1,hospital,Dr Jones would have received the email,2_3,2_3,Dr Smith would have been more diligent in reading their emails,2_2,2_2
+65,70,3,bakery,Sandra had monitored her spam folder,2_5,2_5,anne had read the email,2_2,2_2
+66,71,2,garden,the email had reached alex,2_3,2_3,bob had read the e-mails provided by his management ,2_2,2_2
+67,72,3,bakery,"If the email was not marked as spam and deleted, then Sandra would have been able to read the email and the customer would not have suffered an allergic reaction.",2_3,2_3,"If Anne had read the email from her manager, she would have known about the new flour and known that it contained hazelnuts. Thus, the customer would not have suffered an allergic reaction had she been more thorough.",2_2,2_2
+68,73,2,garden,he had checked his spam folder or updated his settings,X,2_5,he had looked through his emails more carefully,2_2,2_2
+69,74,3,bakery,sandra did not upgrade her email,2_5,2_5,Anne had read the email saying the product contained traces of hazelnuts,2_2,2_2
+70,75,2,garden,"If the email from the garden manager did not go to spam and did not get deleted, Alex would have known of the issue and the Bourbon roses would not have died. ",2_3,2_3,If Bob had just read the email the China roses would not have deid. ,2_2,2_2
+71,76,2,garden,"If Bob has received the email, he could have read it and, ",2_3,2_3,"Bob had read the email containing the information that Nutrit harmed the China Rose, ",2_2,2_2
+72,77,3,bakery,"Sandra asked around more about the new brand, or even called the provider, she would have known.",2_5,2_5,"Anne wasn't irresponsible and read the mail, this could have been prevented.",2_2,2_2
+73,78,1,hospital,...the e-mail settings were not changed...,2_3,2_3,..the doctor had taken the time to read the e-mail...,2_2,2_2
+74,79,3,bakery,Sandra had seen the email,2_2,2_2,Anne opened the email,2_2,2_2
+75,80,1,hospital,"If the upgraded email did not cause an error, sending the email to spam, the patient would not have suffered leg cramps.",2_5,2_5,If the doctor read the important email that cited the side effects the patient would have not suffered leg cramps.,2_2,2_2
+76,83,3,bakery,the company was not cutting corners and using cheap flour,4,4_2,the business was not trying to be as cheap as possible,4,4_2
+77,84,1,hospital,the email was not automatically deleted,2_3,2_3,the doctor would have read the email,2_2,2_2
+78,85,3,bakery,the service provider never make a costly upgrade,2_3,2_3,not for Anne's ignorance,2_1,2_1
+79,86,2,garden,"Alex had done more research and/or consulted his garden manager before using a different, less expensive product",2_5,2_5,"Bob had read his boss's email or, at the very least, had done more research on Nutrit and/or asked his garden manager before using it",2_2,2_2
+80,88,1,hospital,"If the doctor had known that Afibo causes mild leg cramps in AB positive patients, he would have given patient Heparin instead, and the patient would not have suffered leg cramps.",2_1,2_1,"If the doctor had read the email, she would have known about the side effect to B- patients, and would have given a different blood thinner.",2_2,2_2
+81,89,2,garden,"If the email program had been working properly so that Bob could open the email about the fertilizer, the Bourbon roses would not have died.",2_3,2_3,"If Bob had read the email that he was sent, and acted accordingly, the China roses would not have died.",2_2,2_2
+82,90,1,hospital,The email filter was working properly and Dr. Jones had received and read the email,2_3,2_3,Dr. Smith had read her email,2_2,2_2
+83,91,3,bakery,"If Sandra had checked all the products used before baking, the customer would not have suffered an allergic reaction.",2_5,2_5,"If Anne had checked all the used products before baking, or read the email about the produzts, the customer would not have suffered an allergic reaction.",2_5,2_5
+84,92,1,hospital,the email wasn't marked as spam,2_3,2_3,the doctor had read the emails,2_2,2_2
+85,94,3,bakery,I would have instead gone to the bakery myself to let everyone know that day before anyone started using it to bake the product.,4,4_1,I would have went to the bakery to let all of the bakers know in person that the new product contains traces of hazelnuts.,4,4_2
+86,95,3,bakery,"If Sandra knows that Harvest contain walnuts, the customer would not have suffered an allergic reaction.",2_1,2_1,If Anne reads that Homestead contain hazelnuts then the customer would not have suffered an allergic reaction. ,2_2,2_2
+87,96,3,bakery,"The bakery manager should alert  Sandra about walnut traces in the flour it helps Sandra to find out the solution then only the customer would not have suffered an allergic reaction,",2_4,2_4,Anne read the email then the customer would not have suffered an allergic reaction.,2_2,2_2
+88,97,3,bakery,Sandra had taken time to learn the product information about the ingredients she was putting in her products,2_4,2_5,Anne had bothered to read the email about her new ingredients,2_2,2_2
+89,100,2,garden,the email has been sent properly,2_3,2_3,Bob had read the email ,2_2,2_2
+90,101,3,bakery,the manager had not relied on email or required confirmations from employees that they read the email,2_5,2_5,Anne had read the email or if the manager had required confirmation from employees that they read the email,2_2,2_2
+91,102,2,garden,"Alex would of read the label of the fertilizer,",2_5,2_5,Bob had read the e-mail,2_2,2_2
+92,103,2,garden,Alex did not fertilize the roses ,1,1_1,Bob read the email,2_2,2_2
+93,104,2,garden,"he looked in his email spam folder
+
+Maybe the boss should have posted a sign at the garden so he would know. ",2_4,2_4,he would have read his email,2_2,2_2
+94,105,3,bakery,She could have read the email or even the bag itself or ask the company she got it from,2_5,2_5,she could have read the email or the bag,2_2,2_2
+95,106,2,garden,it were the case that Alex knew that Splendor harms Bourbon roses,2_1,2_1,it had been the case that Bob knew that Nutrit harms China roses,2_1,2_1
+96,107,1,hospital,"If Dr. Jones had done her own research on the drug Afibo before prescribing it, the patient would not have suffered leg cramps.",2_5,2_5,"If Dr. Smith had read the email, the patient would not have suffered leg cramps.",2_2,2_2
+97,111,2,garden,"If the email was not marked as spam and automatically deleted, the Bourbon roses would not have died.",2_3,2_3,If Bob had read the email then the China roses would not have died.,2_2,2_2
+98,112,2,garden,"If the manager checked to see that Alex received his email, the Bourbon roses would not have died.",2_4,2_4,"If Bob would have read his email and followed the instructions, the China roses would not have died.",2_2,2_2
+99,113,2,garden,the manager spoke to all employees directly instead of emailing them,2_5,2_4,Bob would've read his email,2_2,2_2
+100,114,1,hospital,"Dr. Jones email service didn't have a bug,the email stating the side effect would have been seen and read and",2_3,2_3,Dr. Smith would have read the email about Corus,2_2,2_2
+101,116,2,garden,the manager had ordered the same fertilizer brand that was safer,4,4_2,Bob had just taken the time to read the email instead of ignoring it,2_2,2_2
+102,118,3,bakery,"If the manager had let Sandra know about the new flour in person, the customer would not have suffered an allergic reaction.",2_4,2_4,If Anne had read the email she would not have used the new flour and the customer would not have suffered an allergic reaction.,2_2,2_2
+103,119,3,bakery,some high range toxic will be produced,0,0,she have an complete rest on them,0,0
+104,120,3,bakery,"If the bakery manager had checked if Sandra read her email, the customer would not have suffered an allergic reaction.",2_4,2_4,"If Anne had read her email, the customer would not have suffered an allergic reaction.",2_2,2_2
+105,124,3,bakery,Sandra's email service provider hadn't falsely marked the email as spam,2_3,2_3,Anne had read the email in her inbox,2_2,2_2
+106,125,2,garden,If Alex had received the email he would not have used the new fertilzer and the roses would not have died.,2_3,2_3,If Bob had read the email from the garden manager he would have known not to use the new fertilizer and the China roses would not have died.,2_2,2_2
+107,126,1,hospital,"the new email system would have been better tested, and not have flagged the email as spam, Dr. Jones would have seen the email about the leg cramps and prescribed the alternate drug, and",2_3,2_3,"Dr Smith had read the email, she would have known that this patient, with their B-Negative blood type, should have been prescribed Sanguin instead of Corus, then,",2_2,2_2
+108,127,2,garden,"If Alex had looked up information on Splendor, he would have found out it harms the Bourbon rose and would not have used it, and the Bourbon roses would not have died.",2_5,2_5,"If Bob had read the email he would have known Nutrit harms the China roses and would not have used it, and the China roses would not have died.",2_2,2_2
+109,128,1,hospital,had not updated the email service,2_3,2_3,had opened the email,2_2,2_2
+110,129,2,garden,The E-mail service had worked correctly and Alex had been able to read the E-mail,2_3,2_3,Bob would have been more careful in checking his work E-mail,2_2,2_2
+111,130,2,garden,"If Alex had checked his spam email or read the warnings on the bottle, or did some research before using the new fertilizer, the Bourbon roses would not have died.",2_5,2_5,"If Bob had checked his emails, used the old fertilizers, did his research or read the warnings, the China roses would not have died.",2_2,2_2
+112,131,3,bakery,if the email didn't get marked as spam the customer would not have suffered an allegeric reaction,2_3,2_3,If the email was read and understood about the ingredients in the product steps could have been taken so the customer would not have suffered an allergic reaction.,2_2,2_2
+113,132,3,bakery,"The manager made sure the employees got the email, or told them in person",2_4,2_4,Anne had read the email,2_2,2_2
+114,133,3,bakery,the email from the manager hadn't been marked as spam,2_3,2_3,Annie had read her emails,2_2,2_2
+115,134,1,hospital,the email hadn't been marked as spam,2_3,2_3,Dr. Smith had read the email,2_2,2_2
+116,135,1,hospital,the email had been working properly,2_3,2_3,"If Dr Smith read their email, then it would be known to cause leg cramps. then they could give another drug or find a way to lessen the discomfort.",2_2,2_2
+117,136,2,garden,he had checked the spam folder,X,2_5,bothered to read his email,2_2,2_2
+118,137,3,bakery,she would have read her email,2_2,2_2,the baker would have read her email,2_2,2_2
+119,138,1,hospital,Dr Jones would have read the email and gave him the other drug instead,2_2,2_2,she would have read the email and didn't prescribe the drug,2_2,2_2
+120,139,1,hospital,dr jones read the email,2_2,2_2,dr smith read the email,2_2,2_2
+121,140,3,bakery,"the person who sent the email had reached out to everyone to ensure they understood the risks, Sandra would have been alerted to the walnut content in the flour and ",2_4,2_4,"Anne had read the email, she would have known not to use Harvest flour and ",2_2,2_2
+122,141,1,hospital,"If the patient would have been prescribed Heparine, the patient would not have suffered leg cramps.",1,1_2,"If the patient would have been prescribed Sanguin, the patient would not have suffered leg cramps.",1,1_2
+123,142,2,garden,Alex have read the email,2_2,2_1,Bob have read the email,2_2,2_2
+124,143,2,garden,"If the manager had made sure that the information about the new fertilizer reached his employees, like with a meeting, the roses wouldn't have died.",2_4,2_4,Not switching from Vitax to Nutrit would have prevented the roses from dying. Bob reading the email from the garden manager probably would have prevented the roses from dying.,1,1_2
+125,144,2,garden,Alex had gotten the email,2_3,2_3,Bob had read the email he got,2_2,2_2
+126,145,1,hospital,If Dr Jones checked her spam she would have known the new drug side effects and could have given the patient another option.,X,2_5,"If Dr. Smith would have read the e-mail about the new drugs, she would have known there could have been mild leg cramps from patients with B-negative blood. Had she known this, she could have offered that patient the medicine they used to administer. ",2_2,2_2
+127,146,3,bakery,the email was not marked as spam,2_3,2_3,Anne read the email,2_2,2_2
+128,147,1,hospital,the email had not been marked as spam,2_3,2_3,Dr.Smith had read the email,2_2,2_2
+129,148,2,garden,"Alex had done a bit more research before using the new product, ",2_5,2_5,Bob had done a bit more research before using the product,2_5,2_5
+130,151,2,garden,"If the email had not been marked as spam, Bob would have been able to read it and the Bourbon roses would not have died.",2_3,2_3,"If Bob had stopped to read the email, he would have known the new fertilizer would harm the China rose, and the China roses would not have died.",2_2,2_2
+131,152,3,bakery,harvest ensured  buyers knew about their products by requesting the customers respond to insure they knew incase emails were sent to spam they could have called  or sandra should have reached out to ensure it was safe for everyone,2_4,2_4,anne read the email should would have known and,2_2,2_2
+132,153,2,garden,"Even if he didn't get the email, he could have enquired about the new fertilizer before using it. ",2_5,2_5,Bob is responsible of taking care of roses. Because they are special he could have been a little more careful when using a new fertilizer. He could have asked someone knowledgeable about it before using it even if he didn't read email.,2_5,2_5
+133,154,1,hospital,"if the routine medication has been changed, it would be necessary for everyone who used the new medication to seek to know the possible side effects for it. So, the doctor should have tried to find out about the side effects, so that he could use the medication.",2_5,2_5,The doctor should have checked his emails about medications so he wouldn't make any mistakes,2_2,2_2
+134,155,1,hospital,the server upgrade had not messed up the emails,2_3,2_3,Dr Smith had happened to have read their emails thoroughly,2_2,2_2
+135,156,1,hospital,The drug has not applied,1,1_1,Dr. Smith has rad the email ,2_2,2_2
+136,157,2,garden,the spam filter didn't mark the email as spam,2_3,2_3,Bob would have read the email,2_2,2_2
+137,158,3,bakery,sandra knew,2_1,2_1,she was aware of the situation,2_1,2_1
+138,159,3,bakery, have inquired about Sandra Harvest,2_5,2_5,Anne had checked the e-mail,2_2,2_2
+139,160,2,garden,"If Alex did not fertilizes the Bourbon roses with the fertilizer ""Splendor"",the Bourbon roses would not have died.""",1,1_1,"If Bob did not fertilizes the China roses with the fertilizer “Nutrit,the China roses would not have died.",1,1_1
+140,161,3,bakery,"If Sandra would have read the label on the new flour or asked the bakery manager about the new flour and if it was ok to use, the customer would not have suffered an allergic reaction",2_5,2_5,"If Anne would have been responsible and read her emails and learned the new flour contains traces of hazelnuts, the customer would not have suffered an allergic reaction.",2_2,2_2
+141,163,3,bakery,"Given how important the issue of nut allergies is, The email sender should have confirmed Sandra received the information or should have called here and informed her instead of emailing her. Sandra should have confirmed that the new flour did not contain nuts before she use it.",2_4,2_4,Anne should have read the email. She should also always check that new flour used does not contain nuts.. The bakery manager should have confirmed Anne read the email and is aware that the new flour contains nuts.,2_2,2_2
+142,165,1,hospital,Dr. Jones would have been informed in a letter or face to face format,2_4,2_4,Would have read the email,2_2,2_2
+143,166,3,bakery,"I Sandra had checked her spam folder and seen the manager's email, she would have known about the walnut in the flour and prevented the allergic reaction of her customer.",X,2_5,"If Anne had read the manager's email, she could either have chosen a different flour or warned her customer. In either case, the customer would not have suffered an allergic reaction.",2_2,2_2
+144,168,1,hospital,"the email service had not marked the email as spam, and the doctor had read it",2_3,2_3,the doctor had read the email,2_2,2_2
+145,170,2,garden,Alex had read the email,2_2,2_2,Bob had read the email,2_2,2_2
+146,172,3,bakery,"the bug does not happen while the upgrade from e-mail service provider of Sandra, she might read the e-mail and might noticed the e-mail from the bakery manager and came to know that the Harvest flour contains traces of walnuts and avoided baking the cake",2_3,2_3,"Anne read the e-mail sent by bakery manager, she might come to know that the new Homestead contains hazenuts and she might avoided baking the cake",2_2,2_2
+147,173,1,hospital,the doctor had done their own follow up research,2_5,2_5,"the doctor would have read the email, or done their own follow up research",2_2,2_2
+148,174,2,garden,Alex read his email,2_2,2_2,Bob read the email or done some research,2_2,2_2
+149,175,3,bakery,Sandra had known about the walnut traces,2_1,2_1,Anne had read the email,2_2,2_2
+150,176,3,bakery,Sandra had gotten the email ,2_3,2_3,Anne had read the email,2_2,2_2
+151,177,1,hospital,Dr. Jones have read the email or the pharmacy company tried other ways of contacting doctors about this drug then,2_2,2_4,Dr. Smith have read the email then ,2_2,2_2
+152,179,3,bakery,"If Sandra would have gotten the email in the right folder, the customer would not have suffered an allergic reaction. ",2_3,2_3,"If Anne would have read the email and seen that the new flour had traces of hazelnut, the customer would not have suffered an allergic reaction. ",2_2,2_2
