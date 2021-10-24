@@ -1,0 +1,490 @@
+---
+title: "Ignorant Causes"
+author: "Lara Kirfel & David Lagnado"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_depth: 4
+    theme: cosmo
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  comment = "",
+  results = "hold",
+  fig.show = "hold")
+```
+
+# Install packages
+
+```{r, message=FALSE}
+install.packages("pastecs");
+install.packages("reshape")
+install.packages("lubridate")
+install.packages("lsr")
+install.packages("janitor")
+install.packages("DT")
+install.packages("Hmisc")
+install.packages("broom")
+install.packages("tidyverse")
+install.packages("ez")
+install.packages("schoRsch")
+install.packages("stringr")
+install.packages('Rdpack')
+install.packages("afex")
+install.packages("VGAM")
+install.packages("mlogit", repo = 'https://mac.R-project.org')
+install.packages("car")
+install.packages("emmeans")
+
+```
+
+# Load packages 
+
+```{r, message=FALSE}
+library("pastecs")
+library("reshape")
+library("knitr")
+library("lubridate")
+library("lsr")
+library("janitor") # for cleaning variable names 
+library("DT") # for nice tables
+library("Hmisc") # for smean function for bootstrapped confidence intervals 
+library("broom") # for tidy regression results
+library("tidyverse") # for data wrangling, visualization, etc. 
+library("ez")
+library("schoRsch")
+library("lme4")
+library("stringr")
+library("dplyr")
+library("nlme")
+library("afex")
+library("mlogit")
+library("car")
+library("emmeans")
+
+
+```
+
+```{r}
+# set ggplot theme 
+theme_set(
+  theme_classic()
+)
+```
+
+# Experiment 1:
+
+## Read in Data
+
+```{r}
+df.data = read.csv(file = "EpStates_1.csv", stringsAsFactors = F, sep = ",") %>% 
+  filter(row_number() > 2) %>% # additional rows in qualtrics csv
+  clean_names() %>% 
+  filter(distribution_channel != "preview",
+         !condition =="", #exclude bot fails,
+          progress ==100| progress==99|progress==98)
+ 
+```
+
+## Structure and edit data
+
+```{r}
+
+df.exp = df.data %>% 
+  mutate(participant = 1:n()) %>% 
+  rename(duration=duration_in_seconds) %>% 
+  mutate(duration=as.numeric(duration)) %>% 
+  select(h_check_fact_1:b_cf_2,
+         participant,
+         order,
+         duration,
+         condition,
+         gender,
+         age,
+         -starts_with("q")
+         ) %>% 
+  gather("index", "value", -c(participant, condition, duration, order))%>% 
+  filter(value != "") %>%
+  arrange(index)%>%
+  mutate(index = ifelse(str_detect(index,"_c_1"),
+                        "cause_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_c_2"),
+                        "cause_2",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_cf_1"),
+                        "cf_no_knowledge",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"_cf_2"),
+                        "cf_knowledge",
+                        index)) %>% 
+  mutate(index = ifelse(str_detect(index,"fact_1"),
+                        "fact_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"fact_2"),
+                        "fact_2",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"know_1"),
+                        "know_1",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"know_2"),
+                        "know_2",
+                        index)) %>% 
+  mutate(order = ifelse(order == 1,"dont know first", 
+                          ifelse(order == 2, "know first", " ")))%>%
+  mutate(scenario = ifelse(condition == 1,"Hospital", 
+                          ifelse(condition == 2, "Garden", 
+                          ifelse(condition == 3, "Bakery", " "))))%>%
+  spread(index, value) %>%
+  arrange(participant)
+
+```
+
+## Create and set participant filter
+
+```{r}
+####Experiment 1: Create filter
+df.exp<- df.exp%>%  
+  mutate(check_total=if_else(know_1=="2", 1, 0)) %>% 
+  mutate(check_total=if_else(know_2 =="1", check_total+1, check_total)) %>% 
+  mutate(check_total=if_else(fact_1 =="1", check_total+1, check_total)) %>% 
+  mutate(check_total=if_else(fact_2=="1",  check_total+1, check_total)) 
+           
+#### Apply filter
+df.exp<-df.exp %>% 
+  filter(check_total ==4) ####Set to 4 to change exlusion criterion to "all check questions correct"
+```
+
+
+##### Export Counterfactual Responses for separate analysis (see analysed datasheet ``Counterfactuals_analysed'' in folder)
+
+#```{r}
+
+df.exp_cf = df.exp %>% 
+  select(participant,
+         condition,
+         contains("cf"))%>% 
+  gather("index", "value", -c(participant, condition))%>% 
+  filter(value != "") %>%
+  arrange(index)%>%
+  mutate(index = ifelse(str_detect(index,"cf_1"),
+                        "not_know",
+                        index))%>% 
+  mutate(index = ifelse(str_detect(index,"cf_2"),
+                        "know",
+                        index))%>% 
+  mutate(scenario = ifelse(condition == 1,"hospital", 
+                          ifelse(condition == 2, "garden", 
+                          ifelse(condition == 3, "bakery", " "))))%>%
+  spread(index, value) %>%
+  arrange(participant)
+
+write.csv(df.exp_cf,'Counterfactuals.csv')
+#```
+
+
+
+##Join dataframe with Analysed Counterfactual Responses Dataframe
+
+```{r}
+df.counterfactuals<-read.csv("Counterfactuals_analysed.csv") %>% 
+  select(participant, code_1, detailed_1, code_2, detailed_2) 
+  
+df.exp<-df.exp %>% 
+inner_join(df.counterfactuals, by="participant") %>% 
+filter(code_1 != "0")
+```
+
+### Demographics
+```{r}
+####Experiment 1
+###Demographics
+
+df.exp_demo <- df.exp %>% 
+  select(age, gender, duration) %>% 
+  mutate(age=as.numeric(age)) %>%
+  transform(gender= ifelse(gender==1, "Male", #recode numbers into gender categories
+                    ifelse(gender==2, "Female",
+                    ifelse(gender==3, "Prefer not to say", gender)))) %>% 
+  filter(age<100 |age ==" ") %>% #remove outliers (year) or N.A.s
+  summarize(n=n(),
+             female=sum(gender=="Female"),
+             not_say=sum(gender=="Prefer not to say"),
+             mean_age = mean(age),
+             std_age=sd(age),
+             mean_time=mean(duration/60),
+             sd_time=sd(duration/60)
+            )
+```
+
+## Create dataframe in long format
+
+```{r}
+####### Createlong Dataframe
+
+
+df.exp_long = df.exp %>% 
+  select(scenario,
+         order,
+         participant,
+         contains("cause"),
+         contains("code"),
+         contains("detailed"))%>%
+  gather(condition, rating, "cause_1":"detailed_2") %>%  
+  mutate(knowledge = ifelse(str_detect(condition, "1"),
+                        "Ignorance", "Knowledge")) %>% 
+  mutate(condition = ifelse(str_detect(condition, "cause"),"causal_rating", 
+                                ifelse(str_detect(condition, "code"), "counterfactual", 
+                                       "counterfactual_specific"))) %>% 
+  spread(condition, rating) %>% 
+  mutate(scenario=as.factor(scenario)) %>% 
+  mutate(knowledge=as.factor(knowledge)) %>% 
+  mutate(knowledge= ordered(knowledge, levels = c("Knowledge", "Ignorance"))) %>% 
+  mutate(causal_rating=as.numeric(causal_rating)) %>% 
+  mutate(counterfactual=dplyr::recode(counterfactual, 
+                               "1" ="action",
+                               "2" ="epistemic state",
+                               "3" = "agent-related", 
+                               "4" = "environment")) %>% 
+  mutate(counterfactual=factor(counterfactual, levels=c("action", "epistemic state", "agent-related", "environment")))
+
+```
+
+
+##### Create Graph for Causal and Counterfactual responses
+
+```{r}
+
+### Set GGplot Theme
+myTheme <-   theme(axis.title.x  = element_blank(), 
+                   axis.title.y = element_text(color="black", size = 14, vjust=.9), 
+                   axis.text.x = element_text(color="black", size = 14),
+                   axis.text.y = element_text(color="black", size = 14), 
+                   strip.text.x = element_text(color="black", size = 14),
+                   legend.text = element_text(color="black", size = 14),
+                   legend.position = "top",
+                   legend.title = element_blank(),
+                   panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   strip.background = element_rect(fill="white"))
+    
+
+################# Causal Responses
+
+CausalExp1 <- ggplot(df.exp_long, aes(x=knowledge,y=causal_rating, fill = knowledge, colour = knowledge))+
+  coord_cartesian(ylim = c(1,7)) +
+  scale_y_continuous(breaks = seq(0, 7, by=1))+
+  geom_line(aes(group=participant),position = position_jitter(width = .1), size = 1, alpha=0.1)+ #Create lines between points for each subject
+  stat_summary(fun=mean, geom='line',color='black',  group = 1, position = position_nudge(x=.1))+ #Create grand averaged effects line
+  #geom_flat_violin(position = position_nudge(x = .1, y = 0),adjust =1.5, alpha=0.5)+
+  geom_point(position = position_jitter(width = .1), size = 1, alpha=0.5)+
+  stat_summary(fun.data = mean_cl_normal, geom = "pointrange", position = position_nudge(x=.1), colour = "BLACK", width = 0.5,
+  size = 1.2, shape = 21, fatten = 2.5)+
+  scale_fill_manual(values=c("#999999", "#E69F00"), name="blank", labels=c("Knowledge", "Ignorance"))+
+  scale_colour_manual(values=c("#999999", "#E69F00"), name="blank", labels=c("Knowledge", "Ignorance"))+
+  labs( y="Causal Rating")+
+  theme_bw()+
+  guides(fill = FALSE, colour = FALSE) +
+  facet_grid(~scenario)+
+  myTheme
+
+  
+CausalExp1
+### Export Figure
+ggsave(CausalExp1, file="Fig1a.pdf", dpi=400, height = 5, width = 8)
+
+##################### Counterfactual Responses
+
+CFExp1<-ggplot(df.exp_long, aes(x=counterfactual, group=knowledge))+
+  geom_bar(aes(y = ..prop.., fill = factor(..x..)), stat="count") + 
+  coord_cartesian(ylim = c(0,1)) +
+  scale_y_continuous(labels=scales::percent_format(accuracy = 1), breaks = seq(0, 1, by=0.20)) +
+  ylab("proportion of responses") +
+  facet_wrap(~knowledge)+
+  scale_fill_brewer(palette="Greys", direction=-1)+
+  theme_bw()+
+  myTheme+
+  theme(legend.position= "none")+
+  theme(
+    axis.text.x = element_text(angle = 20, hjust = 1, color="black", size = 14))
+
+CFExp1
+###Expot Figure
+ggsave(CFExp1, file="Fig1b.pdf", dpi=400, height = 5, width = 8)
+
+```
+
+
+######create new Dataframe for Between Subject Analysis
+
+```{r}
+####Create Dataframe for between subjects analysis
+df.exp_long2 <- df.exp_long %>% 
+  filter(order == "know first" & knowledge == "Knowledge" |order == "dont know first" & knowledge == "Ignorance") 
+  
+```
+
+### Experiment 1
+### Test Fixed Effects: Causal Ratings
+
+```{r}
+
+################### Within Contrasts
+
+#df.exp_long <- within(df.exp_long, knowledge <- relevel(knowledge, ref = 'Knowledge'))
+#df.exp_long <- within(df.exp_long, scenario<- relevel(scenario, ref = 'bakery'))
+
+
+mixed(causal_rating ~ 1 + knowledge*scenario +  (1 | participant), df.exp_long, method = 'LRT')
+C1  <- lmer(causal_rating ~ 1 + knowledge*scenario + (1 | participant), df.exp_long, REML=T)
+summary(C1)
+
+C1_posthoc <- emmeans(C1, pairwise ~ knowledge)
+summary(C1_posthoc)
+
+################### Between Contrasts
+
+C1b  <- lm(causal_rating ~ 1 + knowledge*scenario , df.exp_long2)
+C1b %>% Anova()
+
+####post hoc tests
+C1b_posthoc <- emmeans(C1b, pairwise ~ knowledge|scenario)
+summary(C1b_posthoc)
+```
+
+
+###### Descriptives Causal Jugdments,  Within Contrast
+
+```{r}
+
+#### Descriptives, Within Contrast
+
+df.exp_desc_causal<- df.exp_long%>%
+  group_by(knowledge) %>%
+  summarise(c_mean = mean(causal_rating),#causal rating
+            c_sd   = sd(causal_rating), 
+            c_se   = c_sd / sqrt(n()), 
+            c_upper_ci = c_mean+c_se*1.96, 
+            c_lower_ci = c_mean-c_se*1.96
+)
+
+```
+
+###### Descripives Causal Judgments, Between Contrast
+
+```{r}
+#### Descriptives, Between Contrast
+
+df.exp_desc_causal2<- df.exp_long2%>%
+  group_by(knowledge, scenario) %>%
+  summarise(c_mean = mean(causal_rating),#causal rating
+            c_sd   = sd(causal_rating), 
+            c_se   = c_sd / sqrt(n()), 
+            c_upper_ci = c_mean+c_se*1.96, 
+            c_lower_ci = c_mean-c_se*1.96
+)
+
+```
+
+###### Create Dataframe and Descriptives of Counterfactual Responses, Within Contrast
+
+```{r}
+
+#### Dataframe, Within Contrast
+
+df.exp_cf<- df.exp_long %>% 
+  select(participant, scenario, order, knowledge, counterfactual)
+
+#### Descriptives, Within Contrast
+
+df.exp_cf_desc <- df.exp_cf%>% 
+  select(scenario, counterfactual, knowledge) %>% 
+  group_by(counterfactual, knowledge) %>% 
+  summarize(n=n()) %>% 
+  ungroup(counterfactual) %>% 
+  mutate(total=sum(n)/2,
+         freq=n/total)
+
+```
+
+###### Create Dataframe and Descriptives of Counterfactual Responses, Between Contrast
+
+```{r}
+
+#### Dataframe, Between Contrast
+
+df.exp_cf2<- df.exp_cf%>% 
+  filter(order == "know first" & knowledge == "Knowledge" |order == "dont know first" & knowledge == "Ignorance") 
+
+#### Descriptives, Between Contrast
+
+df.exp_cf_desc2 <- df.exp_cf2%>% 
+  select(scenario, counterfactual, knowledge) %>% 
+  group_by(counterfactual, knowledge) %>% 
+  summarize(n=n()) %>% 
+  ungroup(counterfactual) %>% 
+  group_by(knowledge) %>% 
+  mutate(total=sum(n),
+         freq=n/total)
+
+```
+
+###### Counterfactual Response Analysis:  Within Contrasts
+```{r}
+
+library(VGAM)
+vglm1 <- vglm(counterfactual ~ knowledge, family=multinomial(refLevel="environment"), df.exp_cf) #full model
+vglm0 <- vglm(counterfactual ~ +1, family=multinomial(refLevel="environment"), df.exp_cf) #null model
+
+# Descriptives
+colSums(depvar(vglm1))
+
+## LR Test
+VGAM::lrtest(vglm0, vglm1)
+summary(vglm1)
+
+
+####Odds ratios
+exp(coef(vglm1))
+
+####R-Squared
+LLf   <- logLik(vglm1)
+LL0   <- logLik(vglm0)
+as.vector(1 - (LLf / LL0))
+
+```
+
+###### Counterfactual Response Analysis:  BetweenContrasts
+```{r}
+
+library(VGAM)
+vglm1 <- vglm(counterfactual ~ knowledge, family=multinomial(refLevel="environment"), df.exp_cf2)
+vglm0 <- vglm(counterfactual ~ +1, family=multinomial(refLevel="environment"), df.exp_cf2)
+
+# Descriptives
+colSums(depvar(vglm1))
+
+## LR Test
+VGAM::lrtest(vglm0, vglm1)
+summary(vglm1)
+
+
+####Odds ratios
+exp(coef(vglm1))
+
+####R-Squared
+LLf   <- logLik(vglm1)
+LL0   <- logLik(vglm0)
+as.vector(1 - (LLf / LL0))
+```
+
+
+
+
+
+
+
+
